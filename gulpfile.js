@@ -1,17 +1,17 @@
-'use strict';
-
-const del = require(`del`);
-const gulp = require(`gulp`);
-const sass = require(`gulp-sass`);
-const plumber = require(`gulp-plumber`);
+const del = require(`C:/Users/User/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/del`);
+const gulp = require(`C:/Users/User/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/gulp`);
+const sass = require(`C:/Users/User/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/gulp-sass`);
+const plumber = require(`C:/Users/User/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/gulp-plumber`);
 const postcss = require(`gulp-postcss`);
-const autoprefixer = require(`autoprefixer`);
-const server = require(`browser-sync`).create();
+const autoprefixer = require(`C:/Users/User/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/autoprefixer`);
+const server = require(`C:/Users/User/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/browser-sync`).create();
 const mqpacker = require(`css-mqpacker`);
-const minify = require(`gulp-csso`);
-const rename = require(`gulp-rename`);
+const minify = require(`C:/Users/User/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/gulp-csso`);
+const rename = require(`C:/Users/User/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/gulp-rename`);
 const imagemin = require(`gulp-imagemin`);
 const svgstore = require(`gulp-svgstore`);
+const rollup = require(`gulp-better-rollup`);
+const sourcemaps = require(`C:/Users/User/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/gulp-sourcemaps`);
 
 gulp.task(`style`, () => {
   return gulp.src(`sass/style.scss`).
@@ -46,9 +46,12 @@ gulp.task(`sprite`, () => {
 });
 
 gulp.task(`scripts`, () => {
-  return gulp.src(`js/**/*.js`).
-    pipe(plumber()).
-    pipe(gulp.dest(`build/js/`));
+  return gulp.src(`js/main.js`)
+    .pipe(plumber())
+    .pipe(sourcemaps.init())
+    .pipe(rollup({}, `iife`))
+    .pipe(sourcemaps.write(``))
+    .pipe(gulp.dest(`build/js`));
 });
 
 gulp.task(`imagemin`, [`copy`], () => {
