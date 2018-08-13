@@ -1,13 +1,18 @@
 const mainElement = document.querySelector(`#main`);
 
-export const getElementFromTemplate = (template) => {
+export const renderElement = (template) => {
   const wrapper = document.createElement(`div`);
   wrapper.innerHTML = template.trim();
   return wrapper;
 };
 
-export const selectSlide = (element) => {
+export const showScreen = (element) => {
   mainElement.innerHTML = ``;
-  mainElement.appendChild(element.cloneNode(true));
+  mainElement.appendChild(element);
 };
 
+export const clickShowScreen = (element, screen) => {
+  element.addEventListener(`click`, () => {
+    showScreen(screen);
+  });
+};

@@ -1,4 +1,8 @@
-const game1Template = getElementFromTemplate(`<header class="header">
+import {renderElement, showScreen} from './utils.js';
+import greetingTemplate from './greeting.js';
+import game2Template from './game-2.js';
+
+const game1Template = renderElement(`<header class="header">
 <button class="back">
   <span class="visually-hidden">Вернуться к началу</span>
   <svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
@@ -54,4 +58,21 @@ const game1Template = getElementFromTemplate(`<header class="header">
   <li class="stats__result stats__result--unknown"></li>
 </ul>
 </section>`);
+
+const backBtn = game1Template.querySelector(`button.back`);
+
+const gameContent = game1Template.querySelector(`.game__content`);
+const gameOptions = game1Template.querySelectorAll(`.game__option`);
+
+gameContent.addEventListener(`change`, () => {
+  let gameOptionsChecked = game1Template.querySelectorAll(`.game__option input:checked`);
+  if (gameOptions.length === gameOptionsChecked.length) {
+    showScreen(game2Template);
+  }
+});
+
+backBtn.addEventListener(`click`, () => {
+  showScreen(greetingTemplate);
+});
+
 export default game1Template;
