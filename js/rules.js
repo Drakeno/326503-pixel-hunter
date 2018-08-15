@@ -1,6 +1,6 @@
 import {renderElement, showScreen} from './utils.js';
 import greetingTemplate from './greeting.js';
-import game1Template from './game-1.js';
+import firstGameTemplate from './game-1.js';
 
 const rulesTemplate = renderElement(`<header class="header">
 <button class="back">
@@ -45,7 +45,7 @@ rulesInput.addEventListener(`input`, () => {
 });
 
 rulesForm.addEventListener(`submit`, () => {
-  showScreen(game1Template);
+  showScreen(firstGameTemplate);
 });
 
 backBtn.addEventListener(`click`, () => {

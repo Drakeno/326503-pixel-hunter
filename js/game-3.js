@@ -2,7 +2,7 @@ import {renderElement, showScreen, clickShowScreen} from './utils.js';
 import greetingTemplate from './greeting.js';
 import statsTemplate from './stats.js';
 
-const game3Template = renderElement(`<header class="header">
+const thirdGameTemplate = renderElement(`<header class="header">
 <button class="back">
   <span class="visually-hidden">Вернуться к началу</span>
   <svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
@@ -46,9 +46,9 @@ const game3Template = renderElement(`<header class="header">
 </ul>
 </section>`);
 
-const backBtn = game3Template.querySelector(`button.back`);
+const backBtn = thirdGameTemplate.querySelector(`button.back`);
 
-const gameContent = game3Template.querySelector(`.game__content`);
+const gameContent = thirdGameTemplate.querySelector(`.game__content`);
 const gameOptions = gameContent.querySelectorAll(`.game__option`);
 
 Array.from(gameOptions).forEach((element) => clickShowScreen(element, statsTemplate));
@@ -57,4 +57,4 @@ backBtn.addEventListener(`click`, () => {
   showScreen(greetingTemplate);
 });
 
-export default game3Template;
+export default thirdGameTemplate;

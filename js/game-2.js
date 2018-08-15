@@ -1,8 +1,8 @@
 import {renderElement, showScreen} from './utils.js';
 import greetingTemplate from './greeting.js';
-import game3Template from './game-3.js';
+import thirdGameTemplate from './game-3.js';
 
-const game2Template = renderElement(`<header class="header">
+const secondGameTemplate = renderElement(`<header class="header">
 <button class="back">
   <span class="visually-hidden">Вернуться к началу</span>
   <svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
@@ -48,14 +48,14 @@ const game2Template = renderElement(`<header class="header">
 </ul>
 </section>`);
 
-const backBtn = game2Template.querySelector(`button.back`);
+const backBtn = secondGameTemplate.querySelector(`button.back`);
 
-const gameContent = game2Template.querySelector(`.game__content`);
+const gameContent = secondGameTemplate.querySelector(`.game__content`);
 
 gameContent.addEventListener(`change`, () => {
-  let gameOptionsChecked = game2Template.querySelectorAll(`.game__option input:checked`);
+  let gameOptionsChecked = secondGameTemplate.querySelectorAll(`.game__option input:checked`);
   if (gameOptionsChecked.length >= 1) {
-    showScreen(game3Template);
+    showScreen(thirdGameTemplate);
   }
 });
 
@@ -63,4 +63,4 @@ backBtn.addEventListener(`click`, () => {
   showScreen(greetingTemplate);
 });
 
-export default game2Template;
+export default secondGameTemplate;
