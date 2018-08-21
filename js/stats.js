@@ -120,3 +120,38 @@ backBtn.addEventListener(`click`, () => {
 });
 
 export default statsTemplate;
+
+// Функция подсчёта очков при окончании игры
+export const statsCalc = (answers, lives) => {
+  let points = 0;
+
+  if (!answers || answers === []) {
+    return -1;
+  }
+  if (Object.prototype.toString.call(answers) !== `[object Array]`) {
+    return -1;
+  }
+  if (answers.length !== 10) {
+    return -1;
+  }
+
+  if (lives > 0) {
+    points += lives * 50;
+  }
+
+  answers.forEach(
+      (el) => {
+        if (el.answer === true) {
+          points += 100;
+          if (el.time < 10) {
+            points += 50;
+          }
+          if (el.time > 20) {
+            points -= 50;
+          }
+        }
+      }
+  );
+
+  return points;
+};

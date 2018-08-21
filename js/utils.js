@@ -16,3 +16,7 @@ export const clickShowScreen = (element, screen) => {
     showScreen(screen);
   });
 };
+
+// Управление жизнями игрока
+// Переключение уровней
+// Отсчёт времени
