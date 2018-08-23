@@ -2,15 +2,6 @@ import {assert} from 'chai';
 
 const timerCalc = (time) => time++;
 timerCalc();
-// const timeFlow = (time) => {
-//   for (let i = 0; i <= 30; i++) {
-//     setTimeout(timerCalc(i), 1000);
-//   }
-//   if (time > 30) {
-//     return -1;
-//   }
-//   return time;
-// };
 
 const livesControl = (answer, lives) => {
   if (answer !== true) {
