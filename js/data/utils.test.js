@@ -1,7 +1,7 @@
 import {assert} from 'chai';
 
-const timerCalc = (time) => time++;
-timerCalc();
+// const timerCalc = (time) => time++;
+// timerCalc();
 
 const livesControl = (answer, lives) => {
   if (answer !== true) {
