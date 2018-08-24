@@ -3,7 +3,7 @@ import {assert} from 'chai';
 const statsCalc = (answers, lives) => {
   let points = 0;
 
-  if (!answers || answers === []) {
+  if (!answers || !answers.length) {
     return -1;
   }
   if (Object.prototype.toString.call(answers) !== `[object Array]`) {
