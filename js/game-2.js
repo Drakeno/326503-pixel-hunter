@@ -1,25 +1,7 @@
-import {renderElement, showScreen} from './utils.js';
-import greetingTemplate from './greeting.js';
+import showScreen, {renderElement} from './utils.js';
 import thirdGameTemplate from './game-3.js';
 
-const secondGameTemplate = renderElement(`<header class="header">
-<button class="back">
-  <span class="visually-hidden">Вернуться к началу</span>
-  <svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
-    <use xlink:href="img/sprite.svg#arrow-left"></use>
-  </svg>
-  <svg class="icon" width="101" height="44" viewBox="0 0 101 44" fill="#000000">
-    <use xlink:href="img/sprite.svg#logo-small"></use>
-  </svg>
-</button>
-<div class="game__timer">NN</div>
-<div class="game__lives">
-  <img src="img/heart__empty.svg" class="game__heart" alt="Life" width="31" height="27">
-  <img src="img/heart__full.svg" class="game__heart" alt="Life" width="31" height="27">
-  <img src="img/heart__full.svg" class="game__heart" alt="Life" width="31" height="27">
-</div>
-</header>
-<section class="game">
+const secondGameTemplate = renderElement(`<section class="game">
 <p class="game__task">Угадай, фото или рисунок?</p>
 <form class="game__content  game__content--wide">
   <div class="game__option">
@@ -48,8 +30,6 @@ const secondGameTemplate = renderElement(`<header class="header">
 </ul>
 </section>`);
 
-const backBtn = secondGameTemplate.querySelector(`button.back`);
-
 const gameContent = secondGameTemplate.querySelector(`.game__content`);
 
 gameContent.addEventListener(`change`, () => {
@@ -57,10 +37,6 @@ gameContent.addEventListener(`change`, () => {
   if (gameOptionsChecked.length >= 1) {
     showScreen(thirdGameTemplate);
   }
-});
-
-backBtn.addEventListener(`click`, () => {
-  showScreen(greetingTemplate);
 });
 
 export default secondGameTemplate;

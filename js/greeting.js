@@ -1,5 +1,6 @@
-import {renderElement, clickShowScreen} from './utils.js';
-import rulesTemplate from './rules.js';
+import {renderElement, showComplexScreen} from './utils.js';
+import headerElement from './header';
+import rulesTemplate from './rules';
 
 const greetingTemplate = renderElement(`<section class="greeting central--blur">
 <img class="greeting__logo" src="img/logo_ph-big.svg" width="201" height="89" alt="Pixel Hunter">
@@ -24,6 +25,9 @@ const greetingTemplate = renderElement(`<section class="greeting central--blur">
 
 const continueBtn = greetingTemplate.querySelector(`.greeting__continue`);
 
-clickShowScreen(continueBtn, rulesTemplate);
+continueBtn.addEventListener(`click`, () => {
+  showComplexScreen([headerElement, rulesTemplate]);
+});
+
 
 export default greetingTemplate;

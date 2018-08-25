@@ -1,25 +1,7 @@
-import {renderElement, showScreen, clickShowScreen} from './utils.js';
-import greetingTemplate from './greeting.js';
+import {renderElement, clickShowScreen} from './utils.js';
 import statsTemplate from './stats.js';
 
-const thirdGameTemplate = renderElement(`<header class="header">
-<button class="back">
-  <span class="visually-hidden">Вернуться к началу</span>
-  <svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
-    <use xlink:href="img/sprite.svg#arrow-left"></use>
-  </svg>
-  <svg class="icon" width="101" height="44" viewBox="0 0 101 44" fill="#000000">
-    <use xlink:href="img/sprite.svg#logo-small"></use>
-  </svg>
-</button>
-<div class="game__timer">NN</div>
-<div class="game__lives">
-  <img src="img/heart__empty.svg" class="game__heart" alt="Life" width="31" height="27">
-  <img src="img/heart__full.svg" class="game__heart" alt="Life" width="31" height="27">
-  <img src="img/heart__full.svg" class="game__heart" alt="Life" width="31" height="27">
-</div>
-</header>
-<section class="game">
+const thirdGameTemplate = renderElement(`<section class="game">
 <p class="game__task">Найдите рисунок среди изображений</p>
 <form class="game__content  game__content--triple">
   <div class="game__option">
@@ -46,15 +28,9 @@ const thirdGameTemplate = renderElement(`<header class="header">
 </ul>
 </section>`);
 
-const backBtn = thirdGameTemplate.querySelector(`button.back`);
-
 const gameContent = thirdGameTemplate.querySelector(`.game__content`);
 const gameOptions = gameContent.querySelectorAll(`.game__option`);
 
 Array.from(gameOptions).forEach((element) => clickShowScreen(element, statsTemplate));
-
-backBtn.addEventListener(`click`, () => {
-  showScreen(greetingTemplate);
-});
 
 export default thirdGameTemplate;

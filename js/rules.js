@@ -1,19 +1,7 @@
-import {renderElement, showScreen} from './utils.js';
-import greetingTemplate from './greeting.js';
-import firstGameTemplate from './game-1.js';
+import showScreen, {renderElement} from './utils';
+import firstGameTemplate from './game-1';
 
-const rulesTemplate = renderElement(`<header class="header">
-<button class="back">
-  <span class="visually-hidden">Вернуться к началу</span>
-  <svg class="icon" width="45" height="45" viewBox="0 0 45 45" fill="#000000">
-    <use xlink:href="img/sprite.svg#arrow-left"></use>
-  </svg>
-  <svg class="icon" width="101" height="44" viewBox="0 0 101 44" fill="#000000">
-    <use xlink:href="img/sprite.svg#logo-small"></use>
-  </svg>
-</button>
-</header>
-<section class="rules">
+const rulesTemplate = renderElement(`<section class="rules">
 <h2 class="rules__title">Правила</h2>
 <ul class="rules__description">
   <li>Угадай 10 раз для каждого изображения фото
@@ -30,8 +18,6 @@ const rulesTemplate = renderElement(`<header class="header">
 </form>
 </section>`);
 
-const backBtn = rulesTemplate.querySelector(`button.back`);
-
 const rulesForm = rulesTemplate.querySelector(`.rules__form`);
 const rulesBtn = rulesForm.querySelector(`.rules__button`);
 const rulesInput = rulesForm.querySelector(`.rules__input`);
@@ -46,10 +32,6 @@ rulesInput.addEventListener(`input`, () => {
 
 rulesForm.addEventListener(`submit`, () => {
   showScreen(firstGameTemplate);
-});
-
-backBtn.addEventListener(`click`, () => {
-  showScreen(greetingTemplate);
 });
 
 export default rulesTemplate;
