@@ -1,5 +1,7 @@
-import showScreen, {renderElement} from './utils';
-import firstGameTemplate from './game-1';
+import {showComplexScreen, renderElement} from './utils';
+import initialState, {gameQuestions} from './data';
+import {renderHeader} from './header';
+import renderGame from './game';
 
 const rulesTemplate = renderElement(`<section class="rules">
 <h2 class="rules__title">Правила</h2>
@@ -31,7 +33,7 @@ rulesInput.addEventListener(`input`, () => {
 });
 
 rulesForm.addEventListener(`submit`, () => {
-  showScreen(firstGameTemplate);
+  showComplexScreen([renderHeader(initialState, 1), renderGame([], gameQuestions[initialState.game])]);
 });
 
 export default rulesTemplate;

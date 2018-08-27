@@ -1,8 +1,11 @@
-export const mainElement = document.querySelector(`#main`);
+const mainElement = document.querySelector(`#main`);
 
-export const renderElement = (template) => {
-  const wrapper = document.createElement(`div`);
-  wrapper.innerHTML = template.trim();
+export const renderElement = (template, tagName = `div`, tagClass) => {
+  const wrapper = document.createElement(tagName);
+  wrapper.innerHTML = template;
+  if (tagClass) {
+    wrapper.setAttribute(`class`, tagClass);
+  }
   return wrapper;
 };
 
@@ -18,17 +21,36 @@ export const showComplexScreen = (elements) => {
   );
 };
 
+export const elementConstruct = (container, elements) => {
+  container.innerHTML = ``;
+  elements.forEach(
+      (el) => container.appendChild(el)
+  );
+};
+
 export const clickShowScreen = (element, screen) => {
   element.addEventListener(`click`, () => {
     showScreen(screen);
   });
 };
 
-export const livesControl = (answer, lives) => {
-  if (answer !== true) {
-    lives--;
+export const isEquivalent = (arr1, arr2) => {
+  const aProps = Object.getOwnPropertyNames(arr1);
+  const bProps = Object.getOwnPropertyNames(arr2);
+
+  if (aProps.length !== bProps.length) {
+    return false;
   }
-  return lives;
+
+  for (let i = 0; i < aProps.length; i++) {
+    let propName = aProps[i];
+
+    if (arr1[propName] !== arr2[propName]) {
+      return false;
+    }
+  }
+
+  return true;
 };
 
-export default showScreen;
+export default mainElement;

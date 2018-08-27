@@ -1,4 +1,4 @@
-import showScreen from './utils';
+import {showScreen} from './utils';
 import introTemplate from './intro';
 
 showScreen(introTemplate);

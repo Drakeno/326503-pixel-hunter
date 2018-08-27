@@ -1,108 +1,65 @@
-import {renderElement} from './utils';
-import headerElement from './header';
+import {renderElement, elementConstruct} from './utils';
 
-const statsTemplate = headerElement + renderElement(`<section class="result">
-<h2 class="result__title">Победа!</h2>
-<table class="result__table">
-  <tr>
-    <td class="result__number">1.</td>
-    <td colspan="2">
-      <ul class="stats">
-        <li class="stats__result stats__result--wrong"></li>
-        <li class="stats__result stats__result--slow"></li>
-        <li class="stats__result stats__result--fast"></li>
-        <li class="stats__result stats__result--correct"></li>
-        <li class="stats__result stats__result--wrong"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--slow"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--fast"></li>
-        <li class="stats__result stats__result--unknown"></li>
-      </ul>
-    </td>
-    <td class="result__points">× 100</td>
-    <td class="result__total">900</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td class="result__extra">Бонус за скорость:</td>
-    <td class="result__extra">1 <span class="stats__result stats__result--fast"></span></td>
-    <td class="result__points">× 50</td>
-    <td class="result__total">50</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td class="result__extra">Бонус за жизни:</td>
-    <td class="result__extra">2 <span class="stats__result stats__result--alive"></span></td>
-    <td class="result__points">× 50</td>
-    <td class="result__total">100</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td class="result__extra">Штраф за медлительность:</td>
-    <td class="result__extra">2 <span class="stats__result stats__result--slow"></span></td>
-    <td class="result__points">× 50</td>
-    <td class="result__total">-100</td>
-  </tr>
-  <tr>
-    <td colspan="5" class="result__total  result__total--final">950</td>
-  </tr>
-</table>
-<table class="result__table">
-  <tr>
-    <td class="result__number">2.</td>
-    <td>
-      <ul class="stats">
-        <li class="stats__result stats__result--wrong"></li>
-        <li class="stats__result stats__result--slow"></li>
-        <li class="stats__result stats__result--fast"></li>
-        <li class="stats__result stats__result--correct"></li>
-        <li class="stats__result stats__result--wrong"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--slow"></li>
-        <li class="stats__result stats__result--wrong"></li>
-        <li class="stats__result stats__result--fast"></li>
-        <li class="stats__result stats__result--wrong"></li>
-      </ul>
-    </td>
-    <td class="result__total"></td>
-    <td class="result__total  result__total--final">fail</td>
-  </tr>
-</table>
-<table class="result__table">
-  <tr>
-    <td class="result__number">3.</td>
-    <td colspan="2">
-      <ul class="stats">
-        <li class="stats__result stats__result--wrong"></li>
-        <li class="stats__result stats__result--slow"></li>
-        <li class="stats__result stats__result--fast"></li>
-        <li class="stats__result stats__result--correct"></li>
-        <li class="stats__result stats__result--wrong"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--slow"></li>
-        <li class="stats__result stats__result--unknown"></li>
-        <li class="stats__result stats__result--fast"></li>
-        <li class="stats__result stats__result--unknown"></li>
-      </ul>
-    </td>
-    <td class="result__points">× 100</td>
-    <td class="result__total">900</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td class="result__extra">Бонус за жизни:</td>
-    <td class="result__extra">2 <span class="stats__result stats__result--alive"></span></td>
-    <td class="result__points">× 50</td>
-    <td class="result__total">100</td>
-  </tr>
-  <tr>
-    <td colspan="5" class="result__total  result__total--final">950</td>
-  </tr>
-</table>
-</section>`);
+const getResultTitile = (answers, lives) => (statsCalc(answers, lives) === -1) ? `Поражение!` : `Победа!`;
+const getResults = (answers, lives) => {
+  let rightAnswers = 0;
+  answers.forEach(
+      (el) => {
+        rightAnswers += (el.answer) ? 1 : 0;
+      }
+  );
+  const result = statsCalc(answers, lives);
+  return `<tr>
+  <td class="result__number">1.</td>
+  <td colspan="2">
+  <ul class="stats">
+    ${statsInGameTemplate(answers)}
+    </ul>
+  </td>
+  <td class="result__points">× 100</td>
+  <td class="result__total">${rightAnswers * 100}</td>
+</tr>
+${lives > 0 ? `<tr>
+  <td></td>
+  <td class="result__extra">Бонус за жизни:</td>
+  <td class="result__extra">${lives} <span class="stats__result stats__result--alive"></span></td>
+  <td class="result__points">× 50</td>
+  <td class="result__total">${lives * 50}</td>
+</tr>` : ``}
+<tr>
+  <td colspan="5" class="result__total  result__total--final">${result === -1 ? `FAIL` : result}</td>
+</tr>
+`;
+};
 
-export default statsTemplate;
+export const renderResults = (answers, lives) => {
+  const resultScreen = renderElement(``, `section`, `result`);
+  const resultTitle = renderElement(getResultTitile(answers, lives), `h2`, `result__title`);
+  const resultContent = renderElement(getResults(answers, lives), `table`, `result__table`);
+
+  elementConstruct(resultScreen, [resultTitle, resultContent]);
+
+  return resultScreen;
+};
+
+const statsInGameTemplate = (answers) => {
+  let currentStats = new Array(answers.length);
+  answers.forEach(
+      (el) => {
+        currentStats.push(`<li class="stats__result stats__result--${el.answer ? `correct` : `wrong`}"></li>`);
+      }
+  );
+  return currentStats.join(``);
+};
+
+export const statsInGame = (answers) => renderElement(statsInGameTemplate(answers), `ul`, `stats`);
+
+export const livesControl = (answer, lives) => {
+  if (answer !== true) {
+    lives--;
+  }
+  return lives;
+};
 
 export const statsCalc = (answers, lives) => {
   let points = 0;
@@ -137,3 +94,5 @@ export const statsCalc = (answers, lives) => {
 
   return points;
 };
+
+export default renderResults;
