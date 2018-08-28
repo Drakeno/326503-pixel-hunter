@@ -2,13 +2,9 @@ import {renderElement, elementConstruct} from './utils';
 
 const getResultTitile = (answers, lives) => (statsCalc(answers, lives) === -1) ? `Поражение!` : `Победа!`;
 const getResults = (answers, lives) => {
-  let rightAnswers = 0;
-  answers.forEach(
-      (el) => {
-        rightAnswers += (el.answer) ? 1 : 0;
-      }
-  );
+  const rightAnswers = answers.reduce((sum, current) => (current.answer) ? sum + 1 : sum, 0);
   const result = statsCalc(answers, lives);
+
   return `<tr>
   <td class="result__number">1.</td>
   <td colspan="2">
@@ -42,24 +38,11 @@ export const renderResults = (answers, lives) => {
   return resultScreen;
 };
 
-const statsInGameTemplate = (answers) => {
-  let currentStats = new Array(answers.length);
-  answers.forEach(
-      (el) => {
-        currentStats.push(`<li class="stats__result stats__result--${el.answer ? `correct` : `wrong`}"></li>`);
-      }
-  );
-  return currentStats.join(``);
-};
+const statsInGameTemplate = (answers) => answers.map((el) => `<li class="stats__result stats__result--${el.answer ? `correct` : `wrong`}"></li>`).join(``);
 
 export const statsInGame = (answers) => renderElement(statsInGameTemplate(answers), `ul`, `stats`);
 
-export const livesControl = (answer, lives) => {
-  if (answer !== true) {
-    lives--;
-  }
-  return lives;
-};
+export const livesControl = (answer, lives) => answer ? lives : --lives;
 
 export const statsCalc = (answers, lives) => {
   let points = 0;

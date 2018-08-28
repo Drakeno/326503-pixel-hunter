@@ -3,9 +3,7 @@ const mainElement = document.querySelector(`#main`);
 export const renderElement = (template, tagName = `div`, tagClass) => {
   const wrapper = document.createElement(tagName);
   wrapper.innerHTML = template;
-  if (tagClass) {
-    wrapper.setAttribute(`class`, tagClass);
-  }
+  wrapper.setAttribute(`class`, tagClass || ``);
   return wrapper;
 };
 
@@ -35,22 +33,10 @@ export const clickShowScreen = (element, screen) => {
 };
 
 export const isEquivalent = (arr1, arr2) => {
-  const aProps = Object.getOwnPropertyNames(arr1);
-  const bProps = Object.getOwnPropertyNames(arr2);
+  const aStr = arr1.toString();
+  const bStr = arr2.toString();
 
-  if (aProps.length !== bProps.length) {
-    return false;
-  }
-
-  for (let i = 0; i < aProps.length; i++) {
-    let propName = aProps[i];
-
-    if (arr1[propName] !== arr2[propName]) {
-      return false;
-    }
-  }
-
-  return true;
+  return (aStr === bStr) ? true : false;
 };
 
 export default mainElement;
