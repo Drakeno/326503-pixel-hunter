@@ -1,8 +1,8 @@
-import {renderElement, clickShowScreen} from './utils.js';
-import rulesTemplate from './rules.js';
+import {renderElement, showComplexScreen} from './utils.js';
+import renderHeader from './header';
+import rulesTemplate from './rules';
 
-const greetingTemplate = renderElement(`<section class="greeting central--blur">
-<img class="greeting__logo" src="img/logo_ph-big.svg" width="201" height="89" alt="Pixel Hunter">
+const greetingTemplate = renderElement(`<img class="greeting__logo" src="img/logo_ph-big.svg" width="201" height="89" alt="Pixel Hunter">
 <div class="greeting__asterisk asterisk"><span class="visually-hidden">Я просто красивая звёздочка</span>*</div>
 <div class="greeting__challenge">
   <h3 class="greeting__challenge-title">Лучшие художники-фотореалисты бросают тебе вызов!</h3>
@@ -19,11 +19,13 @@ const greetingTemplate = renderElement(`<section class="greeting central--blur">
   <svg class="icon" width="64" height="64" viewBox="0 0 64 64" fill="#000000">
     <use xlink:href="img/sprite.svg#arrow-right"></use>
   </svg>
-</button>
-</section>`);
+</button>`, `section`, `greeting central--blur`);
 
 const continueBtn = greetingTemplate.querySelector(`.greeting__continue`);
 
-clickShowScreen(continueBtn, rulesTemplate);
+continueBtn.addEventListener(`click`, () => {
+  showComplexScreen([renderHeader(), rulesTemplate]);
+});
+
 
 export default greetingTemplate;
