@@ -2,7 +2,7 @@ import {showComplexScreen, renderElement, elementConstruct, isEquivalent} from '
 import initialState, {gameQuestions} from './data';
 import {renderHeader} from './header';
 import renderResults, {statsInGame, livesControl} from './stats';
-import resize, {complexResize} from './resize';
+import {complexResize} from './resize';
 
 const getGameTask = (game) => game.task;
 
