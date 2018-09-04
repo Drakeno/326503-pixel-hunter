@@ -21,16 +21,16 @@ export const resize = (frame, object) => {
   return calcFrame;
 };
 
-export const complexResize = (frame, objArray) => {
-  const fitSizeArr = [];
-  objArray.forEach((el) => {
+export const complexResize = (frame, picturesUrls) => {
+  const filteredSizes = [];
+  picturesUrls.forEach((el) => {
     let img = new Image();
     img.src = `${el}`;
 
-    fitSizeArr.push(resize(frame, img));
+    filteredSizes.push(resize(frame, img));
   });
 
-  return fitSizeArr;
+  return filteredSizes;
 };
 
 export default resize;

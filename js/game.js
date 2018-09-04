@@ -8,7 +8,7 @@ const getGameTask = (game) => game.task;
 
 // Подбор варианта вывода для разных типов игры
 const getGameScreen = (game) => {
-  const frame = { };
+  let frame = { };
 
   switch (game.type) {
     case `2of2`:
