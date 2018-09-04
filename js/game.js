@@ -9,65 +9,33 @@ const getGameTask = (game) => game.task;
 // Подбор варианта вывода для разных типов игры
 const getGameScreen = (game) => {
   let frame = { };
+  let resizedPictures = [];
 
-  switch (game.type) {
-    case `2of2`:
-      frame.width = 468;
-      frame.height = 458;
-      let twoPictResized = complexResize(frame, game.pictures);
+  if (game.type === `2of2` || game.type === `1of1`) {
+    frame.width = 468;
+    frame.height = 458;
+    resizedPictures = complexResize(frame, game.pictures);
 
-      return `<div class="game__option">
-    <img src="${game.pictures[0]}" alt="Option 1" width="${twoPictResized[0].width}" height="${twoPictResized[0].height}">
-    <label class="game__answer game__answer--photo">
-      <input class="visually-hidden" name="question1" type="radio" value="photo">
-      <span>Фото</span>
-    </label>
-    <label class="game__answer game__answer--paint">
-      <input class="visually-hidden" name="question1" type="radio" value="paint">
-      <span>Рисунок</span>
-    </label>
-  </div>
-  <div class="game__option">
-    <img src="${game.pictures[1]}" alt="Option 2" width="${twoPictResized[1].width}" height="${twoPictResized[1].height}">
-    <label class="game__answer  game__answer--photo">
-      <input class="visually-hidden" name="question2" type="radio" value="photo">
-      <span>Фото</span>
-    </label>
-    <label class="game__answer  game__answer--paint">
-      <input class="visually-hidden" name="question2" type="radio" value="paint">
-      <span>Рисунок</span>
-    </label>
-  </div>`;
+    return game.pictures.map((pictureUrl, index) => `<div class="game__option">
+        <img src="${pictureUrl}" alt="Option ${index}" width="${resizedPictures[index].width}" height="${resizedPictures[index].height}">
+        <label class="game__answer game__answer--photo">
+          <input class="visually-hidden" name="question${index}" type="radio" value="photo">
+          <span>Фото</span>
+        </label>
+        <label class="game__answer game__answer--paint">
+          <input class="visually-hidden" name="question${index}" type="radio" value="paint">
+          <span>Рисунок</span>
+        </label>
+      </div>`).join(``);
+  }
+  if (game.type === `1of3`) {
+    frame.width = 304;
+    frame.height = 455;
+    resizedPictures = complexResize(frame, game.pictures);
 
-    case `1of1`:
-      frame.width = 468;
-      frame.height = 458;
-      let onePictResized = complexResize(frame, game.pictures);
-      return `<div class="game__option">
-     <img src="${game.pictures[0]}" alt="Option 1" width="${onePictResized[0].width}" height="${onePictResized[0].height}">
-     <label class="game__answer  game__answer--photo">
-       <input class="visually-hidden" name="question1" type="radio" value="photo">
-       <span>Фото</span>
-     </label>
-     <label class="game__answer  game__answer--paint">
-       <input class="visually-hidden" name="question1" type="radio" value="paint">
-       <span>Рисунок</span>
-     </label>
-   </div>`;
-
-    case `1of3`:
-      frame.width = 304;
-      frame.height = 455;
-      let threePictResized = complexResize(frame, game.pictures);
-      return `<div class="game__option">
-    <img src="${game.pictures[0]}" alt="Option 1" width="${threePictResized[0].width}" height="${threePictResized[0].height}">
-  </div>
-  <div class="game__option  game__option--selected">
-    <img src="${game.pictures[1]}" alt="Option 2" width="${threePictResized[1].width}" height="${threePictResized[1].height}">
-  </div>
-  <div class="game__option">
-    <img src="${game.pictures[2]}" alt="Option 3" width="${threePictResized[2].width}" height="${threePictResized[2].height}">
-  </div>`;
+    return game.pictures.map((pictureUrl, index) => `<div class="game__option">
+    <img src="${pictureUrl}" alt="Option 1" width="${resizedPictures[index].width}" height="${resizedPictures[index].height}">
+  </div>`).join(``);
   }
   return `Load Failed`;
 };
