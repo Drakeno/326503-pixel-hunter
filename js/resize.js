@@ -24,8 +24,7 @@ export const complexResize = (frame, picturesUrls) => picturesUrls.map((url) => 
   let img = new Image();
   img.onload = () => resize(frame, img);
   img.src = `${url}`;
-  setTimeout(() => {
-  }, 2000);
+  setTimeout(() => {}, 2000);
   return resize(frame, img);
 });
 

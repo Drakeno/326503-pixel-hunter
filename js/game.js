@@ -58,6 +58,27 @@ export const renderGame = (answers, game) => {
   const gameCont = gameScreen.querySelector(`.game__content`);
   const gameOptions = gameScreen.querySelectorAll(`.game__option`);
 
+
+  // Работа с ответами и инициирование включения следующей игры
+  if (game.type === `1of3`) {
+    userAnswers = [];
+    gameOptions.forEach((element, index) => {
+      element.addEventListener(`click`, () => {
+        userAnswers.push(index);
+        changeGame();
+      });
+    });
+  } else {
+    gameCont.addEventListener(`change`, () => {
+      const gameOptionsChecked = Array.from(gameScreen.querySelectorAll(`.game__option input:checked`));
+      userAnswers = gameOptionsChecked.map((el) => (el.value));
+
+      if (gameOptions.length === gameOptionsChecked.length) {
+        changeGame();
+      }
+    });
+  }
+
   // Переход на новый уровень
   const changeGame = () => {
     // Запись ответов в массив. Проверка на правильность и неправильность. Пока по ТЗ просто правильный и неправильный
@@ -80,26 +101,6 @@ export const renderGame = (answers, game) => {
 
     showComplexScreen([renderHeader(state, 1), renderGame(answers, gameQuestions[state.game])]);
   };
-
-  // Работа с ответами и инициирование включения следующей игры
-  if (game.type === `1of3`) {
-    userAnswers = [];
-    gameOptions.forEach((element, index) => {
-      element.addEventListener(`click`, () => {
-        userAnswers.push(index);
-        changeGame();
-      });
-    });
-  } else {
-    gameCont.addEventListener(`change`, () => {
-      const gameOptionsChecked = Array.from(gameScreen.querySelectorAll(`.game__option input:checked`));
-      userAnswers = gameOptionsChecked.map((el) => (el.value));
-
-      if (gameOptions.length === gameOptionsChecked.length) {
-        changeGame();
-      }
-    });
-  }
 
   return gameScreen;
 };
