@@ -1,5 +1,4 @@
 export const resize = (frame, object) => {
-  const calcFrame = {};
   let ratioX = object.width / frame.width;
   let ratioY = object.height / frame.height;
 
@@ -15,15 +14,18 @@ export const resize = (frame, object) => {
     ratioX = ratioY;
   }
 
-  calcFrame.width = object.width / ratioX;
-  calcFrame.height = object.height / ratioY;
-
-  return calcFrame;
+  return {
+    width: object.width / ratioX,
+    height: object.height / ratioY
+  };
 };
 
-export const complexResize = (frame, picturesUrls) => picturesUrls.map((el) => {
+export const complexResize = (frame, picturesUrls) => picturesUrls.map((url) => {
   let img = new Image();
-  img.src = `${el}`;
+  img.onload = () => resize(frame, img);
+  img.src = `${url}`;
+  setTimeout(() => {
+  }, 2000);
   return resize(frame, img);
 });
 
