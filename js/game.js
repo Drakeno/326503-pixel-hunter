@@ -1,5 +1,5 @@
 import {showComplexScreen, renderElement, elementConstruct, isEquivalent} from './utils';
-import initialState, {gameQuestions} from './data';
+import INITIAL_STATE, {gameQuestions} from './data';
 import {renderHeader} from './header';
 import renderResults, {statsInGame, livesControl} from './stats';
 import {complexResize} from './resize';
@@ -44,7 +44,7 @@ const getGameScreen = (game) => {
 let userAnswers = [];
 
 // TODO не сбрасывается при кнопке назад
-const state = Object.assign({}, initialState);
+const state = Object.assign({}, INITIAL_STATE);
 
 export const renderGame = (answers, game) => {
   const gameScreen = renderElement(``, `section`, `game`);

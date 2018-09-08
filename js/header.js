@@ -1,6 +1,6 @@
 import {showScreen, renderElement} from './utils';
 import greetingTemplate from './greeting';
-import initialState from './data';
+import INITIAL_STATE from './data';
 
 export const headerTemplate = `<button class="back">
   <span class="visually-hidden">Вернуться к началу</span>
@@ -12,9 +12,9 @@ export const headerTemplate = `<button class="back">
   </svg>
 </button>`;
 
-export const getHeaderTime = (state = initialState) => state.time;
+export const getHeaderTime = (state = INITIAL_STATE) => state.time;
 
-export const getHeaderLives = (state = initialState) => `${new Array(3 - state.lives)
+export const getHeaderLives = (state = INITIAL_STATE) => `${new Array(3 - state.lives)
     .fill(`<img src="img/heart__empty.svg" class="game__heart" alt=" Missed Life" width="31" height="27">`)
     .join(``)}
   ${state.lives > 0 ? new Array(state.lives)

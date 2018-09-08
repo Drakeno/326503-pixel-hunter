@@ -1,4 +1,4 @@
-const initialState = {
+const INITIAL_STATE = {
   game: `game-1`,
   lives: 3,
   time: 1,
@@ -99,4 +99,4 @@ export const gameQuestions = {
   },
 };
 
-export default initialState;
+export default INITIAL_STATE;

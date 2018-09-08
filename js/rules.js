@@ -1,5 +1,5 @@
 import {showComplexScreen, renderElement} from './utils';
-import initialState, {gameQuestions} from './data';
+import INITIAL_STATE, {gameQuestions} from './data';
 import {renderHeader} from './header';
 import renderGame from './game';
 
@@ -33,7 +33,7 @@ rulesInput.addEventListener(`input`, () => {
 });
 
 rulesForm.addEventListener(`submit`, () => {
-  showComplexScreen([renderHeader(initialState, 1), renderGame([], gameQuestions[initialState.game])]);
+  showComplexScreen([renderHeader(INITIAL_STATE, 1), renderGame([], gameQuestions[INITIAL_STATE.game])]);
 });
 
 export default rulesTemplate;
