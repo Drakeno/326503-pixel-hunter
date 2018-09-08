@@ -2,43 +2,9 @@ import {showComplexScreen, renderElement, elementConstruct, isEquivalent} from '
 import INITIAL_STATE, {gameQuestions} from './data';
 import {renderHeader} from './header';
 import renderResults, {statsInGame, livesControl} from './stats';
-import {complexResize} from './resize';
+import GameView from './game-view';
 
 const getGameTask = (game) => game.task;
-
-// Подбор варианта вывода для разных типов игры
-const getGameScreen = (game) => {
-  let frame = { };
-  let resizedPictures = [];
-
-  if (game.type === `2of2` || game.type === `1of1`) {
-    frame.width = 468;
-    frame.height = 458;
-    resizedPictures = complexResize(frame, game.pictures);
-
-    return game.pictures.map((pictureUrl, index) => `<div class="game__option">
-        <img src="${pictureUrl}" alt="Option ${index}" width="${resizedPictures[index].width}" height="${resizedPictures[index].height}">
-        <label class="game__answer game__answer--photo">
-          <input class="visually-hidden" name="question${index}" type="radio" value="photo">
-          <span>Фото</span>
-        </label>
-        <label class="game__answer game__answer--paint">
-          <input class="visually-hidden" name="question${index}" type="radio" value="paint">
-          <span>Рисунок</span>
-        </label>
-      </div>`).join(``);
-  }
-  if (game.type === `1of3`) {
-    frame.width = 304;
-    frame.height = 455;
-    resizedPictures = complexResize(frame, game.pictures);
-
-    return game.pictures.map((pictureUrl, index) => `<div class="game__option">
-    <img src="${pictureUrl}" alt="Option 1" width="${resizedPictures[index].width}" height="${resizedPictures[index].height}">
-  </div>`).join(``);
-  }
-  return `Load Failed`;
-};
 
 // Я помню, что не стоит делать let, но без них пока не могу придумать как сделать временный state и создать массив ответа юзера
 let userAnswers = [];
@@ -46,19 +12,32 @@ let userAnswers = [];
 // TODO не сбрасывается при кнопке назад
 const state = Object.assign({}, INITIAL_STATE);
 
-export const renderGame = (answers, game) => {
-  const gameScreen = renderElement(``, `section`, `game`);
-  const gameTask = renderElement(getGameTask(game), `p`, `game__task`);
-  const gameContent = renderElement(getGameScreen(game), `form`, `game__content ${game.type === `1of3` ? `game__content--triple` : ``}`);
-  const gameStats = statsInGame(answers);
-  // Сборка разных частей игрового экрана воедино
-  elementConstruct(gameScreen, [gameTask, gameContent, gameStats]);
+const gameScreen = renderElement(``, `section`, `game`);
+const gameTask = renderElement(``, `p`, `game__task`);
+const gameContent = renderElement(``, `form`, `game__content`);
+const gameStats = renderElement(``, `ul`, `stats`);
+elementConstruct(gameScreen, [gameTask, gameContent, gameStats]);
 
+const checkGameType = (game) => {
+  if (game.type === `1of3`) {
+    gameContent.classList.add(`game__content--triple`);
+  } else {
+    gameContent.classList.remove(`game__content--triple`);
+  }
+};
+
+const updateGame = (answers, game) => {
+  gameTask.innerHTML = getGameTask(game);
+  gameContent.innerHTML = new GameView(game).element;
+  checkGameType(game);
+  gameStats.innerHTML = statsInGame(answers);
+};
+
+export const renderGame = (answers, game) => {
+  updateGame(answers, game);
   // Цепляемся за варианты ответов
   const gameCont = gameScreen.querySelector(`.game__content`);
   const gameOptions = gameScreen.querySelectorAll(`.game__option`);
-
-
   // Работа с ответами и инициирование включения следующей игры
   if (game.type === `1of3`) {
     userAnswers = [];
@@ -72,7 +51,6 @@ export const renderGame = (answers, game) => {
     gameCont.addEventListener(`change`, () => {
       const gameOptionsChecked = Array.from(gameScreen.querySelectorAll(`.game__option input:checked`));
       userAnswers = gameOptionsChecked.map((el) => (el.value));
-
       if (gameOptions.length === gameOptionsChecked.length) {
         changeGame();
       }
