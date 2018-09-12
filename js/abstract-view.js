@@ -1,30 +1,42 @@
 import {renderElement} from './utils';
 
 export default class AbstractView {
-  constructor() {
-    if (new.target === AbstractView) {
-      throw new Error(`Can't instantiate AbstractView, only concrete one`);
-    }
-  }
-
-  get template() {
-    throw new Error(`Template is required`);
+  constructor(data, callback) {
+    this.data = data;
+    this.callback = callback;
+    this.actionElements = null;
   }
 
   get element() {
     if (this._element) {
       return this._element;
     }
-    this._element = this.render();
-    this.bind(this._element);
+    const wrapper = renderElement(this.getTemplate());
+    this._element = document.createDocumentFragment();
+    while (wrapper.childNodes.length) {
+      this._element.appendChild(wrapper.childNodes[0]);
+    }
+    this.bind();
     return this._element;
   }
 
-  render() {
-    return renderElement(this.template);
+  getTemplate() {
+
   }
 
   bind() {
+    if (this.actionElements) {
+      this.actionElements.forEach((element) => {
+        element.addEventListener(`click`, this.callback);
+      });
+    }
+  }
 
+  clear() {
+    if (this.actionElements) {
+      this.actionElements.forEach((element) => {
+        element.removeEventListener(`click`, this.callback);
+      });
+    }
   }
 }
