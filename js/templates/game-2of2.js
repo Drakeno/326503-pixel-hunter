@@ -2,19 +2,19 @@ import AbstractView from '../abstract-view';
 import AnswerBtnsView from './items/answer-btns';
 import {imageType} from '../data/game-data';
 import timer from './items/timer';
-import {imageResize} from '../utils';
+// import {imageResize} from '../utils';
 
 // TODO: resize
 export default class TwoOfTwoGameView extends AbstractView {
   getTemplate() {
     const options = (tasks) => {
       const _callback = (item) => {
-        const frame = {
-          width: 468,
-          height: 458
-        };
-        console.log(imageResize(frame, item.src));
-      
+        // const frame = {
+        //   width: 468,
+        //   height: 458
+        // };
+        // imageResize(frame, item.src);
+
         const answersBtns = new AnswerBtnsView(item.name);
         return `<div class="game__option">
         <img src="${item.src}" alt=${item.alt}" width="468" height="458">
