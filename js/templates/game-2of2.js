@@ -15,12 +15,14 @@ export default class TwoOfTwoGameView extends AbstractView {
         // };
         // imageResize(frame, item.src);
 
-        const answersBtns = new AnswerBtnsView(item.name);
+        const index = tasks.indexOf(item) + 1;
+        const answersBtns = new AnswerBtnsView(`question${index}`);
         return `<div class="game__option">
-        <img src="${item.src}" alt=${item.alt}" width="468" height="458">
+        <img src="${item.src}" alt="Option ${index}" width="468" height="458">
         ${answersBtns.getTemplate()}
         </div>`;
       };
+
       return tasks.map(_callback).join(``);
     };
 

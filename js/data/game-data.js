@@ -64,13 +64,9 @@ export const gameData = {
     {
       gameType: gameType.TwoOfTwo,
       tasks: [{
-        name: `question1`,
-        alt: `Option 1`,
         src: initialPictures.paintings[0],
         type: imageType.PAINT
       }, {
-        name: `question2`,
-        alt: `Option 2`,
         src: initialPictures.photos[0],
         type: imageType.PHOTO
       }]
@@ -78,8 +74,6 @@ export const gameData = {
     {
       gameType: gameType.OneOfOne,
       tasks: [{
-        name: `question1`,
-        alt: `Option 1`,
         src: initialPictures.paintings[1],
         type: imageType.PAINT
       }]
@@ -87,18 +81,12 @@ export const gameData = {
     {
       gameType: gameType.OneOfThree,
       tasks: [{
-        isSelected: false,
-        alt: `Option 1`,
         src: initialPictures.photos[1],
         type: imageType.PHOTO
       }, {
-        isSelected: true,
-        alt: `Option 1`,
         src: initialPictures.photos[0],
         type: imageType.PHOTO
       }, {
-        isSelected: false,
-        alt: `Option 1`,
         src: initialPictures.paintings[1],
         type: imageType.PAINT
       }]
@@ -106,13 +94,9 @@ export const gameData = {
     {
       gameType: gameType.TwoOfTwo,
       tasks: [{
-        name: `question1`,
-        alt: `Option 1`,
         src: initialPictures.paintings[2],
         type: imageType.PAINT
       }, {
-        name: `question2`,
-        alt: `Option 2`,
         src: initialPictures.photos[0],
         type: imageType.PHOTO
       }]
@@ -120,8 +104,6 @@ export const gameData = {
     {
       gameType: gameType.OneOfOne,
       tasks: [{
-        name: `question1`,
-        alt: `Option 1`,
         src: initialPictures.paintings[2],
         type: imageType.PAINT
       }]
@@ -129,18 +111,12 @@ export const gameData = {
     {
       gameType: gameType.OneOfThree,
       tasks: [{
-        isSelected: false,
-        alt: `Option 1`,
         src: initialPictures.paintings[2],
         type: imageType.PAINT
       }, {
-        isSelected: true,
-        alt: `Option 1`,
         src: initialPictures.photos[0],
         type: imageType.PHOTO
       }, {
-        isSelected: false,
-        alt: `Option 1`,
         src: initialPictures.photos[2],
         type: imageType.PHOTO
       }]
@@ -148,13 +124,9 @@ export const gameData = {
     {
       gameType: gameType.TwoOfTwo,
       tasks: [{
-        name: `question1`,
-        alt: `Option 1`,
         src: initialPictures.paintings[2],
         type: imageType.PAINT
       }, {
-        name: `question2`,
-        alt: `Option 2`,
         src: initialPictures.paintings[1],
         type: imageType.PAINT
       }]
@@ -162,8 +134,6 @@ export const gameData = {
     {
       gameType: gameType.OneOfOne,
       tasks: [{
-        name: `question1`,
-        alt: `Option 1`,
         src: initialPictures.paintings[0],
         type: imageType.PAINT
       }]
@@ -171,18 +141,12 @@ export const gameData = {
     {
       gameType: gameType.OneOfThree,
       tasks: [{
-        isSelected: false,
-        alt: `Option 1`,
         src: initialPictures.photos[2],
         type: imageType.PHOTO
       }, {
-        isSelected: true,
-        alt: `Option 1`,
         src: initialPictures.paintings[1],
         type: imageType.PAINT
       }, {
-        isSelected: false,
-        alt: `Option 1`,
         src: initialPictures.photos[1],
         type: imageType.PHOTO
       }]
@@ -190,13 +154,9 @@ export const gameData = {
     {
       gameType: gameType.TwoOfTwo,
       tasks: [{
-        name: `question1`,
-        alt: `Option 1`,
         src: initialPictures.paintings[0],
         type: imageType.PAINT
       }, {
-        name: `question2`,
-        alt: `Option 2`,
         src: initialPictures.photos[0],
         type: imageType.PHOTO
       }]

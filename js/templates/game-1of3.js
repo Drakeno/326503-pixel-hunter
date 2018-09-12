@@ -6,9 +6,12 @@ import timer from './items/timer';
 export default class OneOfThreeGameView extends AbstractView {
   getTemplate() {
     const options = (tasks) => {
-      const _callback = (item) => `<div class="game__option${item.isSelected ? ` game__option--selected` : ``}">
-        <img src="${item.src}" alt="${item.alt}" width="304" height="455">
+      const _callback = (item) => {
+        const index = tasks.indexOf(item) + 1;
+        return `<div class="game__option${index === 2 ? ` game__option--selected` : ``}">
+        <img src="${item.src}" alt="Option ${index}" width="304" height="455">
       </div>`;
+      };
       return tasks.map(_callback).join(``);
     };
 

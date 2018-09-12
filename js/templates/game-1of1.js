@@ -8,8 +8,9 @@ export default class OneOfOneGameView extends AbstractView {
   getTemplate() {
     const option = (item) => {
       const answersBtns = new AnswerBtnsView(item.name);
+
       return `<div class="game__option">
-        <img src="${item.src}" alt="${item.alt}" width="705" height="455">
+        <img src="${item.src}" alt="Option 1" width="705" height="455">
         ${answersBtns.getTemplate()}
       </div>`;
     };
