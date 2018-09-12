@@ -1,11 +1,12 @@
 import AbstractView from '../../abstract-view';
 import Application from '../../application';
+
 export default class BackBtnView extends AbstractView {
   constructor() {
     super();
     this.callback = (el) => {
       el.preventDefault();
-      Application.showIntro();
+      Application.showGreeting();
     };
   }
 
@@ -21,10 +22,9 @@ export default class BackBtnView extends AbstractView {
   </button>`;
   }
 
-  // TODO
-  // bind() {
-  //   this.actionElements = this.element.querySelectorAll(`button.back`);
-  //   super.bind();
-  // }
+  static callback(el) {
+    el.preventDefault();
+    Application.showGreeting();
+  }
 }
 

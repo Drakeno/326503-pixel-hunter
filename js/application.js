@@ -11,7 +11,6 @@ export default class Application {
     showScreen(this.currentView.element);
   }
   static showGreeting() {
-    this.currentView.clear();
     this.currentView = new Greeting();
     showScreen(this.currentView.element);
   }

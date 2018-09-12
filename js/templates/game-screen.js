@@ -1,7 +1,7 @@
 import {renderElement, appendElement} from '../utils';
 import GameHeaderView from './items/game-header';
 import AnswersHistoryView from './items/answers-history';
-import gameData, {gameType, imageType} from '../data/game-data';
+import gameData, {gameType} from '../data/game-data';
 import TwoOfTwoGameView from './game-2of2';
 import OneOfOneGameView from './game-1of1';
 import OneOfThreeGameView from './game-1of3';
@@ -13,7 +13,6 @@ export default class GameView {
   constructor() {
     this.round = state.currentRound;
     this.task = this.round.questions[this.round.currentTask];
-
     this.header = this.renderHeader();
     this.level = this.renderLevel();
 
@@ -57,7 +56,7 @@ export default class GameView {
   }
 
   startLevel() {
-    timer.configure(30, this.game.querySelector(`.game__timer`), GameView.timeOverCallback).start();
+    timer.configure(gameData.START_TIME, this.game.querySelector(`.game__timer`), GameView.timeOverCallback).start();
     return this.game;
   }
 
@@ -67,73 +66,21 @@ export default class GameView {
   }
 
   static TwoOfTwoCallback(e) {
-    e.preventDefault();
-    const firstAnswer = document.querySelector(`.game__answer.checked`);
-
-    if (firstAnswer) {
-      const firstInput = firstAnswer.querySelector(`input`);
-      const currentInput = e.currentTarget.querySelector(`input`);
-
-      if (firstInput.name === currentInput.name) {
-        firstInput.checked = false;
-        currentInput.checked = true;
-      } else {
-        timer.stop();
-        const secondAnswer = e.currentTarget.querySelector(`input`).value;
-        const answerSynh = (firstInput.name === `question1`) ? [firstInput.value, secondAnswer] : [secondAnswer, firstInput.value];
-        const answer = answerSynh.map((userAnswer) => {
-          switch (userAnswer) {
-            case `photo`:
-              return imageType.PHOTO;
-            case `paint`:
-              return imageType.PAINT;
-            default:
-              return null;
-          }
-        });
-        state.setResult(answer, timer.getTime());
-        GameView.goToNextScreen();
-      }
-    } else {
-      e.currentTarget.classList.add(`checked`);
-      e.currentTarget.querySelector(`input`).checked = true;
-    }
+    TwoOfTwoGameView.setGame(e, state, GameView);
   }
 
   static OneOfOneCallback(e) {
-    e.preventDefault();
-    timer.stop();
-    let userAnswer = e.currentTarget.querySelector(`input`).value;
-    let answer;
-    if (userAnswer === `photo`) {
-      answer = [imageType.PHOTO];
-    } else if (userAnswer === `paint`) {
-      answer = [imageType.PAINT];
-    }
-    state.setResult(answer, timer.getTime());
-    GameView.goToNextScreen();
+    OneOfOneGameView.setGame(e, state, GameView);
   }
 
   static OneOfThreeCallback(e) {
-    e.preventDefault();
-    timer.stop();
-    const gameOptions = document.querySelectorAll(`.game__option`);
-    let answer = [];
-    gameOptions.forEach((userAnswer) => {
-      if (userAnswer === e.currentTarget) {
-        answer.push(imageType.PAINT);
-      } else {
-        answer.push(imageType.PHOTO);
-      }
-    });
-    state.setResult(answer, timer.getTime());
-    GameView.goToNextScreen();
+    OneOfThreeGameView.setGame(e, state, GameView);
   }
 
   static goToNextScreen() {
     const round = state.currentRound;
     const current = round.currentTask;
-    if (round.lives < 0 || current >= 10) {
+    if (round.lives < gameData.MIN_LIVES || current >= gameData.MAX_ANSWERS) {
       state.countTotal();
       Application.showResults();
     } else {

@@ -34,7 +34,11 @@ const initialPictures = {
 
 export const gameData = {
   TOTAL_LIVES: 3,
+  MIN_LIVES: 0,
   MAX_ANSWERS: 10,
+  START_TIME: 30,
+  FAST_TIME: 20,
+  SLOW_TIME: 10,
 
   statsType: {
     WRONG: 0,

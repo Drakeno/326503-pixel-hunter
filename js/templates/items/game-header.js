@@ -13,4 +13,13 @@ export default class GameHeaderView extends AbstractView {
     const livesView = new LivesView(this.numLives);
     return `<header class="header">${this.backBtn.getTemplate()}<div class="game__timer">30</div>${livesView.getTemplate()}</header>`;
   }
+
+  bind() {
+    this.backBtn = this.element.querySelector(`button.back`);
+    this.backBtn.addEventListener(`click`, BackBtnView.callback);
+  }
+
+  clear() {
+    this.backBtn.removeEventListener(`click`, BackBtnView.callback);
+  }
 }

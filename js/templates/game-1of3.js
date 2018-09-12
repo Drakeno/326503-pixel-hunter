@@ -1,4 +1,6 @@
 import AbstractView from '../abstract-view';
+import {imageType} from '../data/game-data';
+import timer from './items/timer';
 
 // TODO: resize
 export default class OneOfThreeGameView extends AbstractView {
@@ -12,8 +14,25 @@ export default class OneOfThreeGameView extends AbstractView {
 
     return `<form class="game__content  game__content--triple">${options(this.data.tasks)}</form>`;
   }
+
   bind() {
     this.actionElements = this.element.querySelectorAll(`.game__option`);
     super.bind();
+  }
+
+  static setGame(e, state, GameView) {
+    e.preventDefault();
+    timer.stop();
+    const gameOptions = document.querySelectorAll(`.game__option`);
+    let answer = [];
+    gameOptions.forEach((userAnswer) => {
+      if (userAnswer === e.currentTarget) {
+        answer.push(imageType.PAINT);
+      } else {
+        answer.push(imageType.PHOTO);
+      }
+    });
+    state.setResult(answer, timer.getTime());
+    GameView.goToNextScreen();
   }
 }

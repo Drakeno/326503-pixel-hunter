@@ -47,6 +47,7 @@ export const frameGenerate = (w, h) => {
 };
 
 export const resize = (frame, object) => {
+
   let ratioX = object.width / frame.width;
   let ratioY = object.height / frame.height;
 
@@ -68,11 +69,11 @@ export const resize = (frame, object) => {
   };
 };
 
-export const complexResize = (frame, picturesUrls) => picturesUrls.map((url) => {
+export const imageResize = (frame, imageUrl) => {
   let img = new Image();
+  img.src = `${imageUrl}`;
   img.onload = () => resize(frame, img);
-  img.src = `${url}`;
   return resize(frame, img);
-});
+};
 
 export default mainElement;

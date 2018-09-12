@@ -62,6 +62,15 @@ class StatsView extends AbstractView {
     <table class="result__table">${mainBlock}${bonusesBlock}${totalBlock}</table>
   </section>`;
   }
+
+  bind() {
+    this.backBtn = this.element.querySelector(`button.back`);
+    this.backBtn.addEventListener(`click`, BackBtnView.callback);
+  }
+
+  clear() {
+    this.backBtn.removeEventListener(`click`, BackBtnView.callback);
+  }
 }
 
 export default () => new StatsView().element;

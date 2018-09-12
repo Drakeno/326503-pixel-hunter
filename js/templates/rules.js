@@ -48,19 +48,14 @@ export default class RulesView extends AbstractView {
       Application.showGame();
     };
 
-    this.backBtncallback = (el) => {
-      el.preventDefault();
-      Application.showGreeting();
-    };
-
     this.rulesInput.addEventListener(`input`, this.inputCallback);
     this.rulesForm.addEventListener(`submit`, this.submitCallback);
-    this.backBtn.addEventListener(`click`, this.backBtncallback);
+    this.backBtn.addEventListener(`click`, BackBtnView.callback);
   }
 
   clear() {
     this.rulesInput.removeEventListener(`input`, this.inputCallback);
     this.rulesForm.removeEventListener(`submit`, this.submitCallback);
-    this.backBtn.removeEventListener(`submit`, this.submitCallback);
+    this.backBtn.removeEventListener(`click`, BackBtnView.callback);
   }
 }

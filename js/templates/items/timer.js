@@ -6,8 +6,8 @@ class Timer {
     this.container = null;
   }
 
-  configure(sec, container, callback) {
-    this.currentTime = sec;
+  configure(startTime, container, callback) {
+    this.currentTime = startTime;
     this.container = container;
     this.callback = callback;
     return this;
