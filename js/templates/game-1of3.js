@@ -1,26 +1,49 @@
 import AbstractView from '../abstract-view';
 import {imageType} from '../data/game-data';
 import timer from './items/timer';
+import {renderElement, resizeImg} from '../utils';
 
-// TODO: resize
 export default class OneOfThreeGameView extends AbstractView {
+  get element() {
+    if (this._element) {
+      return this._element;
+    }
+    const wrapper = this.getTemplate();
+    this._element = wrapper;
+    this.bind();
+    return this._element;
+  }
+
   getTemplate() {
     const options = (tasks) => {
-      const _callback = (item) => {
+      const content = renderElement(``, `form`, `game__content game__content--triple`);
+      tasks.forEach((item) => {
+        const properImg = OneOfThreeGameView.properSize(item);
         const index = tasks.indexOf(item) + 1;
-        return `<div class="game__option${index === 2 ? ` game__option--selected` : ``}">
-        <img src="${item.src}" alt="Option ${index}" width="304" height="455">
-      </div>`;
-      };
-      return tasks.map(_callback).join(``);
+        properImg.alt = `Option ${index}`;
+        const option = renderElement(``, `div`, `game__option`);
+        option.appendChild(properImg);
+
+        content.appendChild(option);
+      });
+
+      return content;
     };
 
-    return `<form class="game__content  game__content--triple">${options(this.data.tasks)}</form>`;
+    return options(this.data.tasks);
   }
 
   bind() {
     this.actionElements = this.element.querySelectorAll(`.game__option`);
     super.bind();
+  }
+
+  static properSize(image) {
+    const frame = {
+      width: 304,
+      height: 455
+    };
+    return resizeImg(image, frame);
   }
 
   static setGame(e, state, GameView) {

@@ -2,25 +2,49 @@ import AbstractView from '../abstract-view';
 import AnswerBtnsView from './items/answer-btns';
 import {imageType} from '../data/game-data';
 import timer from './items/timer';
+import {renderElement, resizeImg} from '../utils';
 
-// TODO: resize
 export default class OneOfOneGameView extends AbstractView {
+  get element() {
+    if (this._element) {
+      return this._element;
+    }
+    const wrapper = this.getTemplate();
+    this._element = wrapper;
+    this.bind();
+    return this._element;
+  }
+
   getTemplate() {
     const option = (item) => {
-      const answersBtns = new AnswerBtnsView(item.name);
+      const content = renderElement(``, `form`, `game__content`);
+      const properImg = OneOfOneGameView.properSize(item);
+      properImg.alt = `Option 1`;
+      const answersBtns = new AnswerBtnsView(`question1`).element;
 
-      return `<div class="game__option">
-        <img src="${item.src}" alt="Option 1" width="705" height="455">
-        ${answersBtns.getTemplate()}
-      </div>`;
+      const soloOption = renderElement(``, `div`, `game__option`);
+      soloOption.appendChild(properImg);
+      soloOption.appendChild(answersBtns);
+
+      content.appendChild(soloOption);
+
+      return content;
     };
 
-    return `<form class="game__content  game__content--wide">${option(this.data.tasks[0])}</form>`;
+    return option(this.data.tasks[0]);
   }
 
   bind() {
     this.actionElements = this.element.querySelectorAll(`.game__answer`);
     super.bind();
+  }
+
+  static properSize(image) {
+    const frame = {
+      width: 468,
+      height: 458
+    };
+    return resizeImg(image, frame);
   }
 
   static setGame(e, state, GameView) {

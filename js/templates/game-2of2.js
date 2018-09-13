@@ -2,36 +2,49 @@ import AbstractView from '../abstract-view';
 import AnswerBtnsView from './items/answer-btns';
 import {imageType} from '../data/game-data';
 import timer from './items/timer';
-// import {imageResize} from '../utils';
+import {renderElement, resizeImg} from '../utils';
 
-// TODO: resize
 export default class TwoOfTwoGameView extends AbstractView {
+  get element() {
+    if (this._element) {
+      return this._element;
+    }
+    const wrapper = this.getTemplate();
+    this._element = wrapper;
+    this.bind();
+    return this._element;
+  }
+
   getTemplate() {
     const options = (tasks) => {
-      const _callback = (item) => {
-        // const frame = {
-        //   width: 468,
-        //   height: 458
-        // };
-        // imageResize(frame, item.src);
-
+      const content = renderElement(``, `form`, `game__content`);
+      tasks.forEach((item) => {
+        const properImg = TwoOfTwoGameView.properSize(item);
         const index = tasks.indexOf(item) + 1;
-        const answersBtns = new AnswerBtnsView(`question${index}`);
-        return `<div class="game__option">
-        <img src="${item.src}" alt="Option ${index}" width="468" height="458">
-        ${answersBtns.getTemplate()}
-        </div>`;
-      };
+        properImg.alt = `Option ${index}`;
+        const answersBtns = new AnswerBtnsView(`question${index}`).element;
+        const option = renderElement(``, `div`, `game__option`);
+        option.appendChild(properImg);
+        option.appendChild(answersBtns);
 
-      return tasks.map(_callback).join(``);
+        content.appendChild(option);
+      });
+      return content;
     };
-
-    return `<form class="game__content">${options(this.data.tasks)}</form>`;
+    return options(this.data.tasks);
   }
 
   bind() {
     this.actionElements = this.element.querySelectorAll(`.game__answer`);
     super.bind();
+  }
+
+  static properSize(image) {
+    const frame = {
+      width: 468,
+      height: 458
+    };
+    return resizeImg(image, frame);
   }
 
   static setGame(e, state, GameView) {

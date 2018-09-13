@@ -69,11 +69,15 @@ export const resize = (frame, object) => {
   };
 };
 
-export const imageResize = (frame, imageUrl) => {
+export const resizeImg = (image, frame) => {
   let img = new Image();
-  img.src = `${imageUrl}`;
-  img.onload = () => resize(frame, img);
-  return resize(frame, img);
+  img.src = image.src;
+  img.onload = () => {
+    const properSize = resize(frame, img);
+    img.width = properSize.width;
+    img.height = properSize.height;
+  };
+  return img;
 };
 
 export default mainElement;
