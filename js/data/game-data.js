@@ -9,29 +9,6 @@ export const imageType = {
   PHOTO: 1
 };
 
-const initialPictures = {
-  paintings: [
-    // People
-    `https://k42.kn3.net/CF42609C8.jpg`,
-
-    // Animals
-    `https://k42.kn3.net/D2F0370D6.jpg`,
-
-    // Nature
-    `https://k32.kn3.net/5C7060EC5.jpg`
-  ],
-  photos: [
-    // People
-    `http://i.imgur.com/1KegWPz.jpg`,
-
-    // Animals
-    `https://i.imgur.com/DiHM5Zb.jpg`,
-
-    // Nature
-    `http://i.imgur.com/DKR1HtB.jpg`
-  ]
-};
-
 export const gameData = {
   TOTAL_LIVES: 3,
   MIN_LIVES: 0,
@@ -53,115 +30,26 @@ export const gameData = {
     BONUS: 50,
     FINE: -50
   },
-
-  questionText: {
-    [gameType.TwoOfTwo]: `Угадайте для каждого изображения фото или рисунок?`,
-    [gameType.OneOfOne]: `Угадай, фото или рисунок?`,
-    [gameType.OneOfThree]: `Найдите рисунок среди изображений`
-  },
-
-  questions: [
-    {
-      gameType: gameType.TwoOfTwo,
-      tasks: [{
-        src: initialPictures.paintings[0],
-        type: imageType.PAINT
-      }, {
-        src: initialPictures.photos[0],
-        type: imageType.PHOTO
-      }]
-    },
-    {
-      gameType: gameType.OneOfOne,
-      tasks: [{
-        src: initialPictures.paintings[1],
-        type: imageType.PAINT
-      }]
-    },
-    {
-      gameType: gameType.OneOfThree,
-      tasks: [{
-        src: initialPictures.photos[1],
-        type: imageType.PHOTO
-      }, {
-        src: initialPictures.photos[0],
-        type: imageType.PHOTO
-      }, {
-        src: initialPictures.paintings[1],
-        type: imageType.PAINT
-      }]
-    },
-    {
-      gameType: gameType.TwoOfTwo,
-      tasks: [{
-        src: initialPictures.paintings[2],
-        type: imageType.PAINT
-      }, {
-        src: initialPictures.photos[0],
-        type: imageType.PHOTO
-      }]
-    },
-    {
-      gameType: gameType.OneOfOne,
-      tasks: [{
-        src: initialPictures.paintings[2],
-        type: imageType.PAINT
-      }]
-    },
-    {
-      gameType: gameType.OneOfThree,
-      tasks: [{
-        src: initialPictures.paintings[2],
-        type: imageType.PAINT
-      }, {
-        src: initialPictures.photos[0],
-        type: imageType.PHOTO
-      }, {
-        src: initialPictures.photos[2],
-        type: imageType.PHOTO
-      }]
-    },
-    {
-      gameType: gameType.TwoOfTwo,
-      tasks: [{
-        src: initialPictures.paintings[2],
-        type: imageType.PAINT
-      }, {
-        src: initialPictures.paintings[1],
-        type: imageType.PAINT
-      }]
-    },
-    {
-      gameType: gameType.OneOfOne,
-      tasks: [{
-        src: initialPictures.paintings[0],
-        type: imageType.PAINT
-      }]
-    },
-    {
-      gameType: gameType.OneOfThree,
-      tasks: [{
-        src: initialPictures.photos[2],
-        type: imageType.PHOTO
-      }, {
-        src: initialPictures.paintings[1],
-        type: imageType.PAINT
-      }, {
-        src: initialPictures.photos[1],
-        type: imageType.PHOTO
-      }]
-    },
-    {
-      gameType: gameType.TwoOfTwo,
-      tasks: [{
-        src: initialPictures.paintings[0],
-        type: imageType.PAINT
-      }, {
-        src: initialPictures.photos[0],
-        type: imageType.PHOTO
-      }]
-    }
-  ]
 };
+
+export class GameData {
+  constructor() {
+    this.currentRound = 0;
+    this.rounds = [
+      {
+        questions: [],
+        currentTask: 0,
+        lives: gameData.TOTAL_LIVES,
+        stats: [],
+        result: []
+      }
+    ];
+  }
+
+  configure(questData) {
+    this.rounds[0].questions = questData;
+    return this;
+  }
+}
 
 export default gameData;

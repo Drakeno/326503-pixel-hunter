@@ -18,18 +18,8 @@ export const showScreen = (element) => {
   mainElement.appendChild(element);
 };
 
-export const showComplexScreen = (elements) => {
-  mainElement.innerHTML = ``;
-  elements.forEach(
-      (el) => mainElement.appendChild(el)
-  );
-};
-
-export const elementConstruct = (container, elements) => {
-  container.innerHTML = ``;
-  elements.forEach(
-      (el) => container.appendChild(el)
-  );
+export const showElement = (element) => {
+  mainElement.appendChild(element);
 };
 
 export const isEquivalent = (arr1, arr2) => {
@@ -37,13 +27,6 @@ export const isEquivalent = (arr1, arr2) => {
   const bStr = arr2.toString();
 
   return (aStr === bStr) ? true : false;
-};
-
-export const frameGenerate = (w, h) => {
-  return {
-    width: w,
-    height: h,
-  };
 };
 
 export const resize = (frame, object) => {
@@ -69,11 +52,15 @@ export const resize = (frame, object) => {
   };
 };
 
-export const imageResize = (frame, imageUrl) => {
-  let img = new Image();
-  img.src = `${imageUrl}`;
-  img.onload = () => resize(frame, img);
-  return resize(frame, img);
+export const resizeImg = (image, frame) => {
+  const img = new Image();
+  img.src = image.src;
+  img.onload = () => {
+    const properSize = resize(frame, img);
+    img.width = properSize.width;
+    img.height = properSize.height;
+  };
+  return img;
 };
 
 export default mainElement;
