@@ -56,6 +56,11 @@ export const resize = (frame, object) => {
     result.height = object.height / (object.width / frame.width);
   }
 
+  if (result.height > frame.height) {
+    result.width = object.width / (object.height / frame.height);
+    result.height = object.height / (object.height / frame.height);
+  }
+
   return result;
 };
 

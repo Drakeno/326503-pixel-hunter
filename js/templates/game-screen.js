@@ -89,7 +89,7 @@ export default class GameView {
     const current = round.currentTask;
     if (round.lives < gameData.MIN_LIVES || current >= gameData.MAX_ANSWERS) {
       state.countTotal();
-      Application.showResults();
+      Application.showResults(state);
     } else {
       Application.showGame();
     }
