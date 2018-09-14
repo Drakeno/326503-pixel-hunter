@@ -57,8 +57,14 @@ export default class GameView {
   }
 
   startLevel() {
+    state.configure(this.questData);
     timer.configure(gameData.START_TIME, this.game.querySelector(`.game__timer`), GameView.timeOverCallback).start();
+
     return this.game;
+  }
+
+  returnQuestions() {
+    return this.questData;
   }
 
   static timeOverCallback() {

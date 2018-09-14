@@ -30,28 +30,26 @@ export const gameData = {
     BONUS: 50,
     FINE: -50
   },
-
-  // example
-  // questions: [
-  //   {
-  //     question: `Угадайте для каждого изображения фото или рисунок?`,
-  //     gameType: gameType.TwoOfTwo,
-  //     tasks: [
-  //     {
-  //       src: 'https://k39.kn3.net/E07A38605.jpg',
-  //       type: imageType.PAINT,
-  //       width: 468,
-  //       height: 458
-  //     },
-  //     {
-  //       src: 'http://i.imgur.com/zHRZW1C.jpg',
-  //       type: imageType.PHOTO,
-  //       width: 468,
-  //       height: 458
-  //     }
-  //     ]
-  //   }
-  // ]
 };
+
+export class GameData {
+  constructor() {
+    this.currentRound = 0;
+    this.rounds = [
+      {
+        questions: [],
+        currentTask: 0,
+        lives: gameData.TOTAL_LIVES,
+        stats: [],
+        result: []
+      }
+    ];
+  }
+
+  configure(questData) {
+    this.rounds[0].questions = questData;
+    return this;
+  }
+}
 
 export default gameData;

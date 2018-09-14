@@ -1,33 +1,25 @@
-import gameData from './game-data';
+import gameData, {GameData} from './game-data';
 import {isEquivalent} from '../utils';
-
-const initialState = {
-  currentRound: 0,
-  rounds: [
-    {
-      questions: [],
-      currentTask: 0,
-      lives: 3,
-      stats: [],
-      result: []
-    }
-  ]
-};
 
 const points = gameData.points;
 const statsType = gameData.statsType;
 
 class State {
-  constructor(state = initialState) {
-    this._state = state;
+  constructor(state) {
+    const initialState = new GameData();
+    this._state = state ? state : initialState;
   }
 
   get currentRound() {
     return this._state.rounds[this._state.currentRound];
   }
 
-  setQuestions(questions) {
-    this._state.rounds = questions;
+  configure(data) {
+    if (!this._state.rounds[0].questions.length) {
+      const initialState = new GameData().configure(data);
+      this._state = initialState;
+    }
+    return this;
   }
 
   setResult(answer, time) {
