@@ -15,9 +15,12 @@ export default class Application {
     showScreen(splash.element);
     splash.start();
     Loader.loadData().
-    then((data) => questData = data).
-    then((response) => Application.showIntro()).
-    catch(Application.showError).
+      then((data) => {
+        questData = data;
+        return questData;
+      }).
+      then((response) => Application.showIntro(response)).
+      catch(Application.showError).
     then(() => splash.stop());
   }
 
