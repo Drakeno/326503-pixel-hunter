@@ -41,8 +41,8 @@ export default class TwoOfTwoGameView extends AbstractView {
 
   static properSize(image) {
     const frame = {
-      width: 468,
-      height: 458
+      width: image.width,
+      height: image.height
     };
     return resizeImg(image, frame);
   }

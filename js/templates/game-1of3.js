@@ -40,8 +40,8 @@ export default class OneOfThreeGameView extends AbstractView {
 
   static properSize(image) {
     const frame = {
-      width: 304,
-      height: 455
+      width: image.width,
+      height: image.height
     };
     return resizeImg(image, frame);
   }
@@ -50,7 +50,7 @@ export default class OneOfThreeGameView extends AbstractView {
     e.preventDefault();
     timer.stop();
     const gameOptions = document.querySelectorAll(`.game__option`);
-    let answer = [];
+    const answer = [];
     gameOptions.forEach((userAnswer) => {
       if (userAnswer === e.currentTarget) {
         answer.push(imageType.PAINT);

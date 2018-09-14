@@ -5,7 +5,7 @@ const initialState = {
   currentRound: 0,
   rounds: [
     {
-      questions: gameData.questions,
+      questions: [],
       currentTask: 0,
       lives: 3,
       stats: [],
@@ -21,8 +21,13 @@ class State {
   constructor(state = initialState) {
     this._state = state;
   }
+
   get currentRound() {
     return this._state.rounds[this._state.currentRound];
+  }
+
+  setQuestions(questions) {
+    this._state.rounds = questions;
   }
 
   setResult(answer, time) {

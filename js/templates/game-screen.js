@@ -10,9 +10,10 @@ import state from '../data/state';
 import timer from './items/timer';
 
 export default class GameView {
-  constructor() {
+  constructor(questData) {
+    this.questData = questData;
     this.round = state.currentRound;
-    this.task = this.round.questions[this.round.currentTask];
+    this.task = this.questData[this.round.currentTask];
     this.header = this.renderHeader();
     this.level = this.renderLevel();
 
@@ -35,7 +36,7 @@ export default class GameView {
   }
 
   renderGameTask() {
-    return renderElement(gameData.questionText[this.task.gameType], `p`, `game__task`);
+    return renderElement(this.questData[this.round.currentTask].question, `p`, `game__task`);
   }
 
   renderGameContent() {

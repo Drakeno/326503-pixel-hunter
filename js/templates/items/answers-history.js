@@ -17,7 +17,6 @@ export default class AnswersHistoryView extends AbstractView {
 
     let _answers = this.data;
 
-    // TODO
     for (let i = _answers.length; i < gameData.MAX_ANSWERS; i++) {
       _answers.push(type.UNKNOWN);
     }
