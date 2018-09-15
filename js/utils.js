@@ -46,10 +46,22 @@ export const resize = (frame, object) => {
     ratioX = ratioY;
   }
 
-  return {
+  const result = {
     width: object.width / ratioX,
     height: object.height / ratioY
   };
+
+  if (result.width > frame.width) {
+    result.width = object.width / (object.width / frame.width);
+    result.height = object.height / (object.width / frame.width);
+  }
+
+  if (result.height > frame.height) {
+    result.width = object.width / (object.height / frame.height);
+    result.height = object.height / (object.height / frame.height);
+  }
+
+  return result;
 };
 
 export const resizeImg = (image, frame) => {

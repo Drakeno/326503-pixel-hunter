@@ -122,7 +122,7 @@ class State {
       }
     });
 
-    const isWin = wrong < gameData.TOTAL_LIVES;
+    const isWin = wrong < gameData.TOTAL_LIVES + 1;
 
     let total;
     if (isWin) {
