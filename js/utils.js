@@ -26,7 +26,7 @@ export const isEquivalent = (array1, array2) => {
   const aString = array1.toString();
   const bString = array2.toString();
 
-  return (aString === bString) ? true : false;
+  return aString === bString;
 };
 
 export const resize = (frame, object) => {
@@ -73,6 +73,14 @@ export const resizeImg = (image, frame) => {
     picture.height = properSize.height;
   };
   return picture;
+};
+
+export const resizeToProperSize = (image) => {
+  const frame = {
+    width: image.width,
+    height: image.height
+  };
+  return resizeImg(image, frame);
 };
 
 export default mainElement;

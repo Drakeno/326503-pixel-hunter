@@ -4,7 +4,7 @@ import BackButtonView from './items/back-button';
 import templatesData from '../data/templates-data';
 import {globalGameData} from '../data/game-data';
 const data = templatesData.statsPage;
-const points = globalGameData.points;
+const points = globalGameData.Points;
 
 export default class StatsView extends AbstractView {
   constructor(state) {

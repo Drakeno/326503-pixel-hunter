@@ -48,7 +48,7 @@ class State {
   static checkAnswerType(taskResult) {
     let result = statsType.UNKNOWN;
 
-    if (taskResult.isCorrect === true) {
+    if (taskResult.isCorrect) {
       if (taskResult.currentTime > globalGameData.FAST_TIME) {
         result = statsType.FAST;
       } else if (taskResult.currentTime < globalGameData.SLOW_TIME) {
@@ -56,7 +56,7 @@ class State {
       } else {
         result = statsType.CORRECT;
       }
-    } else if (taskResult.isCorrect === false) {
+    } else if (!taskResult.isCorrect) {
       result = statsType.WRONG;
     }
     return Object.assign({}, taskResult, {

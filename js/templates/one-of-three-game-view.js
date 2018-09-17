@@ -1,7 +1,7 @@
 import AbstractView from '../abstract-view';
 import {ImageType} from '../data/game-data';
 import timer from './items/timer';
-import {renderElement, resizeImg} from '../utils';
+import {renderElement, resizeToProperSize} from '../utils';
 
 export default class OneOfThreeGameView extends AbstractView {
   get element() {
@@ -18,7 +18,7 @@ export default class OneOfThreeGameView extends AbstractView {
     const createOptions = (tasks) => {
       const content = renderElement(``, `form`, `game__content game__content--triple`);
       tasks.forEach((item) => {
-        const properImage = OneOfThreeGameView.resizeToProperSize(item);
+        const properImage = resizeToProperSize(item);
         const index = tasks.indexOf(item) + 1;
         properImage.alt = `Option ${index}`;
         const option = renderElement(``, `div`, `game__option`);
@@ -36,14 +36,6 @@ export default class OneOfThreeGameView extends AbstractView {
   bind() {
     this.actionElements = this.element.querySelectorAll(`.game__option`);
     super.bind();
-  }
-
-  static resizeToProperSize(image) {
-    const frame = {
-      width: image.width,
-      height: image.height
-    };
-    return resizeImg(image, frame);
   }
 
   static setGame(element, state, GameView) {

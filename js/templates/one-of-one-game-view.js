@@ -2,7 +2,7 @@ import AbstractView from '../abstract-view';
 import AnswerButtonsView from './items/answer-buttons';
 import {ImageType} from '../data/game-data';
 import timer from './items/timer';
-import {renderElement, resizeImg} from '../utils';
+import {renderElement, resizeToProperSize} from '../utils';
 
 export default class OneOfOneGameView extends AbstractView {
   get element() {
@@ -18,7 +18,7 @@ export default class OneOfOneGameView extends AbstractView {
   getTemplate() {
     const createOption = (item) => {
       const content = renderElement(``, `form`, `game__content game__content--wide`);
-      const properImage = OneOfOneGameView.resizeToProperSize(item);
+      const properImage = resizeToProperSize(item);
       properImage.alt = `Option 1`;
       const answersButtons = new AnswerButtonsView(`question1`).element;
 
@@ -37,14 +37,6 @@ export default class OneOfOneGameView extends AbstractView {
   bind() {
     this.actionElements = this.element.querySelectorAll(`.game__answer`);
     super.bind();
-  }
-
-  static resizeToProperSize(image) {
-    const frame = {
-      width: image.width,
-      height: image.height
-    };
-    return resizeImg(image, frame);
   }
 
   static setGame(element, state, GameView) {
