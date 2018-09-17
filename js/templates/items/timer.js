@@ -18,7 +18,7 @@ class Timer {
   }
 
   start() {
-    const _tick = () => {
+    const tick = () => {
       this.container.innerHTML = this.currentTime;
       this.currentTime--;
 
@@ -27,11 +27,11 @@ class Timer {
           this.callback();
         }
       } else {
-        this.timeoutId = setTimeout(_tick, 1000);
+        this.timeoutId = setTimeout(tick, 1000);
       }
     };
 
-    _tick();
+    tick();
   }
   stop() {
     if (this.timeoutId !== null) {

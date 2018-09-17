@@ -15,13 +15,13 @@ export default class AnswersHistoryView extends AbstractView {
       [type.UNKNOWN]: resultsView.unknown
     };
 
-    const _answers = this.data;
+    const answers = this.data;
 
-    for (let i = _answers.length; i < gameData.MAX_ANSWERS; i++) {
-      _answers.push(type.UNKNOWN);
+    for (let i = answers.length; i < gameData.MAX_ANSWERS; i++) {
+      answers.push(type.UNKNOWN);
     }
 
-    const stats = _answers.map((answer) => statsItem[answer]).join(``);
+    const stats = answers.map((answer) => statsItem[answer]).join(``);
 
     return `<ul class="stats">${stats}</ul>`;
   }
