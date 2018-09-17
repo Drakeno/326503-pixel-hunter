@@ -1,5 +1,6 @@
 import AbstractView from '../../abstract-view';
 import Application from '../../application';
+import state from '../../data/state';
 
 export default class BackButtonView extends AbstractView {
   constructor() {
@@ -24,6 +25,7 @@ export default class BackButtonView extends AbstractView {
 
   static callback(element) {
     element.preventDefault();
+    state.reset();
     Application.showGreeting();
   }
 }

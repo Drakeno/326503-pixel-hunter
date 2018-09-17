@@ -44,10 +44,12 @@ export default class GameData {
         result: []
       }
     ];
+    this.name = name;
   }
 
-  configure(questData) {
+  configure(questData, name) {
     this.rounds[0].questions = questData;
+    this.name = name;
     return this;
   }
 }

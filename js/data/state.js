@@ -1,4 +1,5 @@
 import GameData, {globalGameData} from './game-data';
+import timer from '../templates/items/timer';
 import {isEquivalent} from '../utils';
 
 const points = globalGameData.Points;
@@ -14,11 +15,18 @@ class State {
     return this._state.rounds[this._state.currentRound];
   }
 
-  configure(data) {
+  configure(data, name) {
     if (!this._state.rounds[0].questions.length) {
-      const initialState = new GameData().configure(data);
+      const initialState = new GameData().configure(data, name);
       this._state = initialState;
     }
+    return this;
+  }
+
+  reset() {
+    const initialState = new GameData();
+    this._state = initialState;
+    timer.stop();
     return this;
   }
 
@@ -102,7 +110,7 @@ class State {
   static countTotal(momentState) {
     const round = momentState.rounds[momentState.currentRound];
     const result = round.result;
-
+    const name = momentState.name;
     let correct = 0;
     let wrong = 0;
     let fastBonuses = 0;
@@ -132,7 +140,8 @@ class State {
         totalPoints: correct * points.CORRECT + (livesBonuses + fastBonuses) * points.BONUS + fines * points.FINE,
         fastBonuses,
         livesBonuses: round.lives,
-        slowFine: fines
+        slowFine: fines,
+        name
       };
     } else {
       total = {
@@ -141,7 +150,8 @@ class State {
         totalPoints: 0,
         fastBonuses: 0,
         livesBonuses: 0,
-        slowFine: 0
+        slowFine: 0,
+        name
       };
     }
     const gameStatus = Object.assign({}, round, total);

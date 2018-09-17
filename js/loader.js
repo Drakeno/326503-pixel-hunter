@@ -8,10 +8,9 @@ const APP_ID = 12132332721;
 const checkStatus = (response) => {
   if (response.ok) {
     return response;
-  } else {
-    Application.showError(`${response.status}`);
-    throw new Error(`${response.status}: ${response.statusText}`);
   }
+  Application.showError(`${response.status}`);
+  throw new Error(`${response.status}: ${response.statusText}`);
 };
 
 const toJSON = (res) => res.json();

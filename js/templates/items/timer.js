@@ -6,10 +6,11 @@ class Timer {
     this.container = null;
   }
 
-  configure(startTime, container, callback) {
+  configure(startTime, container, timeWarningCallback, timeOverCallback) {
     this.currentTime = startTime;
     this.container = container;
-    this.callback = callback;
+    this.callback = timeOverCallback;
+    this.timeWarningCallback = timeWarningCallback;
     return this;
   }
 
@@ -22,10 +23,11 @@ class Timer {
       this.container.innerHTML = this.currentTime;
       this.currentTime--;
 
-      if (this.currentTime <= 0) {
-        if (this.callback !== null) {
-          this.callback();
-        }
+      if (this.currentTime < 0) {
+        this.callback();
+      } else if (this.currentTime < 5) {
+        this.timeWarningCallback();
+        this.timeoutId = setTimeout(tick, 1000);
       } else {
         this.timeoutId = setTimeout(tick, 1000);
       }

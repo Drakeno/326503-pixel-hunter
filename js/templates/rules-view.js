@@ -45,7 +45,7 @@ export default class RulesView extends AbstractView {
 
     this.submitCallback = (element) => {
       element.preventDefault();
-      Application.showGame();
+      Application.showGame(this.rulesInput.value);
     };
 
     this.rulesInput.addEventListener(`input`, this.inputCallback);

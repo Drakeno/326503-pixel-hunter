@@ -1,5 +1,5 @@
 import {renderElement, appendElement} from '../utils';
-import GameHeaderView from './items/game-header';
+import GameHeaderView from './items/game-header-view';
 import AnswersHistoryView from './items/answers-history';
 import {globalGameData, GameType} from '../data/game-data';
 import TwoOfTwoGameView from './two-of-two-game-view';
@@ -10,7 +10,8 @@ import state from '../data/state';
 import timer from './items/timer';
 
 export default class GameView {
-  constructor(questData) {
+  constructor(questData, name) {
+    this.name = name;
     this.questData = questData;
     this.round = state.currentRound;
     this.task = this.questData[this.round.currentTask];
@@ -57,14 +58,18 @@ export default class GameView {
   }
 
   startLevel() {
-    state.configure(this.questData);
-    timer.configure(globalGameData.START_TIME, this.game.querySelector(`.game__timer`), GameView.timeOverCallback).start();
+    state.configure(this.questData, this.name);
+    timer.configure(globalGameData.START_TIME, this.game.querySelector(`.game__timer`), GameView.timeWarningCallback, GameView.timeOverCallback).start();
 
     return this.game;
   }
 
   returnQuestions() {
     return this.questData;
+  }
+
+  static timeWarningCallback() {
+    this.container.classList.add(`blink`);
   }
 
   static timeOverCallback() {

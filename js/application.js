@@ -7,6 +7,7 @@ import Greeting from './templates/greeting-view';
 import Rules from './templates/rules-view';
 import Game from './templates/game-view';
 import StatsView from './templates/stats-view';
+import state from './data/state';
 
 let questData;
 export default class Application {
@@ -37,19 +38,20 @@ export default class Application {
     this.currentView = new Rules();
     showScreen(this.currentView.element);
   }
-  static showGame() {
+  static showGame(name) {
     if (this.currentView) {
       this.currentView.clear();
     }
     this.currentView = null;
     showScreen(new Game(questData, name).startLevel());
   }
-  static showResults(state) {
-    const scoreBoard = new StatsView(state);
+  static showResults(status) {
+    const scoreBoard = new StatsView(status);
     showScreen(scoreBoard.element);
-    Loader.saveResults(state.currentRound, `Default`).
-      then(() => Loader.loadResults(`Default`).
+    Loader.saveResults(status.currentRound, status.currentRound.name).
+      then(() => Loader.loadResults(status.currentRound.name).
       then((data) => scoreBoard.showScores(data)).
+      then(state.reset()).
       catch(Application.showError));
   }
 
