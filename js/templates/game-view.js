@@ -1,10 +1,10 @@
 import {renderElement, appendElement} from '../utils';
 import GameHeaderView from './items/game-header';
 import AnswersHistoryView from './items/answers-history';
-import gameData, {GameType} from '../data/game-data';
-import TwoOfTwoGameView from './game-2of2';
-import OneOfOneGameView from './game-1of1';
-import OneOfThreeGameView from './game-1of3';
+import {globalGameData, GameType} from '../data/game-data';
+import TwoOfTwoGameView from './two-of-two-game-view';
+import OneOfOneGameView from './one-of-one-game-view';
+import OneOfThreeGameView from './one-of-three-game-view';
 import Application from '../application';
 import state from '../data/state';
 import timer from './items/timer';
@@ -58,7 +58,7 @@ export default class GameView {
 
   startLevel() {
     state.configure(this.questData);
-    timer.configure(gameData.START_TIME, this.game.querySelector(`.game__timer`), GameView.timeOverCallback).start();
+    timer.configure(globalGameData.START_TIME, this.game.querySelector(`.game__timer`), GameView.timeOverCallback).start();
 
     return this.game;
   }
@@ -87,7 +87,7 @@ export default class GameView {
   static goToNextScreen() {
     const round = state.currentRound;
     const current = round.currentTask;
-    if (round.lives < gameData.MIN_LIVES || current >= gameData.MAX_ANSWERS) {
+    if (round.lives < globalGameData.MIN_LIVES || current >= globalGameData.MAX_ANSWERS) {
       state.countTotal();
       Application.showResults(state);
     } else {

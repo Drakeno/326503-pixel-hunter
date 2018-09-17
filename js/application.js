@@ -2,11 +2,11 @@ import {showScreen, showElement} from './utils';
 import SplashScreen from './splash-screen';
 import ErrorModal from './templates/error-modal';
 import Loader from './loader';
-import Intro from './templates/intro';
-import Greeting from './templates/greeting';
-import Rules from './templates/rules';
-import Game from './templates/game-screen';
-import StatsView from './templates/stats';
+import Intro from './templates/intro-view';
+import Greeting from './templates/greeting-view';
+import Rules from './templates/rules-view';
+import Game from './templates/game-view';
+import StatsView from './templates/stats-view';
 
 let questData;
 export default class Application {

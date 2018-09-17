@@ -1,10 +1,10 @@
-import gameData from '../../data/game-data';
+import {globalGameData} from '../../data/game-data';
 import templatesData from '../../data/templates-data';
 import AbstractView from '../../abstract-view';
 
 export default class AnswersHistoryView extends AbstractView {
   getTemplate() {
-    const type = gameData.StatsType;
+    const type = globalGameData.StatsType;
     const resultsView = templatesData.statsTesults;
 
     const statsItem = {
@@ -17,7 +17,7 @@ export default class AnswersHistoryView extends AbstractView {
 
     const answers = this.data;
 
-    for (let i = answers.length; i < gameData.MAX_ANSWERS; i++) {
+    for (let i = answers.length; i < globalGameData.MAX_ANSWERS; i++) {
       answers.push(type.UNKNOWN);
     }
 

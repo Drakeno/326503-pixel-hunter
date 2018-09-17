@@ -9,7 +9,7 @@ export const ImageType = {
   PHOTO: 1
 };
 
-export const gameData = {
+export const globalGameData = {
   TOTAL_LIVES: 3,
   MIN_LIVES: 0,
   MAX_ANSWERS: 10,
@@ -32,14 +32,14 @@ export const gameData = {
   },
 };
 
-export class GameData {
+export default class GameData {
   constructor() {
     this.currentRound = 0;
     this.rounds = [
       {
         questions: [],
         currentTask: 0,
-        lives: gameData.TOTAL_LIVES,
+        lives: globalGameData.TOTAL_LIVES,
         stats: [],
         result: []
       }
@@ -51,5 +51,3 @@ export class GameData {
     return this;
   }
 }
-
-export default gameData;

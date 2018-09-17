@@ -1,8 +1,8 @@
-import gameData, {GameData} from './game-data';
+import GameData, {globalGameData} from './game-data';
 import {isEquivalent} from '../utils';
 
-const points = gameData.Points;
-const statsType = gameData.StatsType;
+const points = globalGameData.Points;
+const statsType = globalGameData.StatsType;
 
 class State {
   constructor(state) {
@@ -49,9 +49,9 @@ class State {
     let result = statsType.UNKNOWN;
 
     if (taskResult.isCorrect === true) {
-      if (taskResult.currentTime > gameData.FAST_TIME) {
+      if (taskResult.currentTime > globalGameData.FAST_TIME) {
         result = statsType.FAST;
-      } else if (taskResult.currentTime < gameData.SLOW_TIME) {
+      } else if (taskResult.currentTime < globalGameData.SLOW_TIME) {
         result = statsType.SLOW;
       } else {
         result = statsType.CORRECT;
@@ -122,7 +122,7 @@ class State {
       }
     });
 
-    const isWin = wrong < gameData.TOTAL_LIVES + 1;
+    const isWin = wrong < globalGameData.TOTAL_LIVES + 1;
 
     let total;
     if (isWin) {

@@ -2,9 +2,9 @@ import AbstractView from '../abstract-view';
 import AnswersHistoryView from './items/answers-history';
 import BackButtonView from './items/back-button';
 import templatesData from '../data/templates-data';
-import gameData from '../data/game-data';
+import {globalGameData} from '../data/game-data';
 const data = templatesData.statsPage;
-const points = gameData.points;
+const points = globalGameData.points;
 
 export default class StatsView extends AbstractView {
   constructor(state) {
