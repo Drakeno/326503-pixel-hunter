@@ -16,9 +16,9 @@ export default class OneOfOneGameView extends AbstractView {
   }
 
   getTemplate() {
-    const option = (item) => {
+    const createOption = (item) => {
       const content = renderElement(``, `form`, `game__content game__content--wide`);
-      const properImage = OneOfOneGameView.properSize(item);
+      const properImage = OneOfOneGameView.resizeToProperSize(item);
       properImage.alt = `Option 1`;
       const answersButtons = new AnswerButtonsView(`question1`).element;
 
@@ -31,7 +31,7 @@ export default class OneOfOneGameView extends AbstractView {
       return content;
     };
 
-    return option(this.data.tasks[0]);
+    return createOption(this.data.tasks[0]);
   }
 
   bind() {
@@ -39,7 +39,7 @@ export default class OneOfOneGameView extends AbstractView {
     super.bind();
   }
 
-  static properSize(image) {
+  static resizeToProperSize(image) {
     const frame = {
       width: image.width,
       height: image.height
@@ -50,7 +50,7 @@ export default class OneOfOneGameView extends AbstractView {
   static setGame(element, state, GameView) {
     element.preventDefault();
     timer.stop();
-    let userAnswer = element.currentTarget.querySelector(`input`).value;
+    const userAnswer = element.currentTarget.querySelector(`input`).value;
     let answer;
     if (userAnswer === `photo`) {
       answer = [ImageType.PHOTO];

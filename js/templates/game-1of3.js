@@ -15,10 +15,10 @@ export default class OneOfThreeGameView extends AbstractView {
   }
 
   getTemplate() {
-    const options = (tasks) => {
+    const createOptions = (tasks) => {
       const content = renderElement(``, `form`, `game__content game__content--triple`);
       tasks.forEach((item) => {
-        const properImage = OneOfThreeGameView.properSize(item);
+        const properImage = OneOfThreeGameView.resizeToProperSize(item);
         const index = tasks.indexOf(item) + 1;
         properImage.alt = `Option ${index}`;
         const option = renderElement(``, `div`, `game__option`);
@@ -30,7 +30,7 @@ export default class OneOfThreeGameView extends AbstractView {
       return content;
     };
 
-    return options(this.data.tasks);
+    return createOptions(this.data.tasks);
   }
 
   bind() {
@@ -38,7 +38,7 @@ export default class OneOfThreeGameView extends AbstractView {
     super.bind();
   }
 
-  static properSize(image) {
+  static resizeToProperSize(image) {
     const frame = {
       width: image.width,
       height: image.height

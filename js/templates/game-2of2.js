@@ -16,10 +16,10 @@ export default class TwoOfTwoGameView extends AbstractView {
   }
 
   getTemplate() {
-    const options = (tasks) => {
+    const createOptions = (tasks) => {
       const content = renderElement(``, `form`, `game__content`);
       tasks.forEach((item) => {
-        const properImage = TwoOfTwoGameView.properSize(item);
+        const properImage = TwoOfTwoGameView.resizeToProperSize(item);
         const index = tasks.indexOf(item) + 1;
         properImage.alt = `Option ${index}`;
         const answersBtns = new AnswerBtnsView(`question${index}`).element;
@@ -31,7 +31,7 @@ export default class TwoOfTwoGameView extends AbstractView {
       });
       return content;
     };
-    return options(this.data.tasks);
+    return createOptions(this.data.tasks);
   }
 
   bind() {
@@ -39,7 +39,7 @@ export default class TwoOfTwoGameView extends AbstractView {
     super.bind();
   }
 
-  static properSize(image) {
+  static resizeToProperSize(image) {
     const frame = {
       width: image.width,
       height: image.height
