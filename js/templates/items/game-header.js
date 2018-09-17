@@ -1,4 +1,4 @@
-import BackBtnView from './back-btn';
+import BackButtonView from './back-button';
 import LivesView from './lives';
 import AbstractView from '../../abstract-view';
 
@@ -6,20 +6,20 @@ export default class GameHeaderView extends AbstractView {
   constructor(numLives) {
     super();
     this.numLives = numLives;
-    this.backBtn = new BackBtnView();
+    this.backButton = new BackButtonView();
   }
 
   getTemplate() {
     const livesView = new LivesView(this.numLives);
-    return `<header class="header">${this.backBtn.getTemplate()}<div class="game__timer">30</div>${livesView.getTemplate()}</header>`;
+    return `<header class="header">${this.backButton.getTemplate()}<div class="game__timer">30</div>${livesView.getTemplate()}</header>`;
   }
 
   bind() {
-    this.backBtn = this.element.querySelector(`button.back`);
-    this.backBtn.addEventListener(`click`, BackBtnView.callback);
+    this.backButton = this.element.querySelector(`button.back`);
+    this.backButton.addEventListener(`click`, BackButtonView.callback);
   }
 
   clear() {
-    this.backBtn.removeEventListener(`click`, BackBtnView.callback);
+    this.backButton.removeEventListener(`click`, BackButtonView.callback);
   }
 }

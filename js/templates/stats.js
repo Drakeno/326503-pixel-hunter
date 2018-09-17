@@ -1,6 +1,6 @@
 import AbstractView from '../abstract-view';
 import AnswersHistoryView from './items/answers-history';
-import BackBtnView from './items/back-btn';
+import BackButtonView from './items/back-button';
 import templatesData from '../data/templates-data';
 import gameData from '../data/game-data';
 const data = templatesData.statsPage;
@@ -13,7 +13,7 @@ export default class StatsView extends AbstractView {
   }
 
   getTemplate() {
-    const backBtn = new BackBtnView();
+    const backBtn = new BackButtonView();
     return `<header class="header">${backBtn.getTemplate()}</header>
   <section class="result">
     <h1>Результаты загружаются...</h1>
@@ -77,12 +77,12 @@ export default class StatsView extends AbstractView {
 
   bind() {
     this.backBtn = this.element.querySelector(`button.back`);
-    this.backBtn.addEventListener(`click`, BackBtnView.callback);
+    this.backBtn.addEventListener(`click`, BackButtonView.callback);
     this._scoreBoardContainer = this.element.querySelector(`section.result`);
   }
 
   clear() {
-    this.backBtn.removeEventListener(`click`, BackBtnView.callback);
+    this.backBtn.removeEventListener(`click`, BackButtonView.callback);
   }
 }
 

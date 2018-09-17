@@ -22,11 +22,11 @@ export const showElement = (element) => {
   mainElement.appendChild(element);
 };
 
-export const isEquivalent = (arr1, arr2) => {
-  const aStr = arr1.toString();
-  const bStr = arr2.toString();
+export const isEquivalent = (array1, array2) => {
+  const aString = array1.toString();
+  const bString = array2.toString();
 
-  return (aStr === bStr) ? true : false;
+  return (aString === bString) ? true : false;
 };
 
 export const resize = (frame, object) => {
@@ -65,14 +65,14 @@ export const resize = (frame, object) => {
 };
 
 export const resizeImg = (image, frame) => {
-  const img = new Image();
-  img.src = image.src;
-  img.onload = () => {
-    const properSize = resize(frame, img);
-    img.width = properSize.width;
-    img.height = properSize.height;
+  const picture = new Image();
+  picture.src = image.src;
+  picture.onload = () => {
+    const properSize = resize(frame, picture);
+    picture.width = properSize.width;
+    picture.height = properSize.height;
   };
-  return img;
+  return picture;
 };
 
 export default mainElement;

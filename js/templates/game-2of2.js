@@ -1,5 +1,5 @@
 import AbstractView from '../abstract-view';
-import AnswerBtnsView from './items/answer-btns';
+import AnswerBtnsView from './items/answer-buttons';
 import {imageType} from '../data/game-data';
 import timer from './items/timer';
 import {renderElement, resizeImg} from '../utils';
@@ -19,12 +19,12 @@ export default class TwoOfTwoGameView extends AbstractView {
     const options = (tasks) => {
       const content = renderElement(``, `form`, `game__content`);
       tasks.forEach((item) => {
-        const properImg = TwoOfTwoGameView.properSize(item);
+        const properImage = TwoOfTwoGameView.properSize(item);
         const index = tasks.indexOf(item) + 1;
-        properImg.alt = `Option ${index}`;
+        properImage.alt = `Option ${index}`;
         const answersBtns = new AnswerBtnsView(`question${index}`).element;
         const option = renderElement(``, `div`, `game__option`);
-        option.appendChild(properImg);
+        option.appendChild(properImage);
         option.appendChild(answersBtns);
 
         content.appendChild(option);
@@ -47,20 +47,20 @@ export default class TwoOfTwoGameView extends AbstractView {
     return resizeImg(image, frame);
   }
 
-  static setGame(e, state, GameView) {
-    e.preventDefault();
+  static setGame(element, state, GameView) {
+    element.preventDefault();
     const firstAnswer = document.querySelector(`.game__answer.checked`);
 
     if (firstAnswer) {
       const firstInput = firstAnswer.querySelector(`input`);
-      const currentInput = e.currentTarget.querySelector(`input`);
+      const currentInput = element.currentTarget.querySelector(`input`);
 
       if (firstInput.name === currentInput.name) {
         firstInput.checked = false;
         currentInput.checked = true;
       } else {
         timer.stop();
-        const secondAnswer = e.currentTarget.querySelector(`input`).value;
+        const secondAnswer = element.currentTarget.querySelector(`input`).value;
         const answerSynchronize = (firstInput.name === `question1`) ? [firstInput.value, secondAnswer] : [secondAnswer, firstInput.value];
         const answer = answerSynchronize.map((userAnswer) => {
           switch (userAnswer) {
@@ -76,8 +76,8 @@ export default class TwoOfTwoGameView extends AbstractView {
         GameView.goToNextScreen();
       }
     } else {
-      e.currentTarget.classList.add(`checked`);
-      e.currentTarget.querySelector(`input`).checked = true;
+      element.currentTarget.classList.add(`checked`);
+      element.currentTarget.querySelector(`input`).checked = true;
     }
   }
 }

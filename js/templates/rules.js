@@ -1,20 +1,20 @@
 import templatesData from '../data/templates-data';
 import AbstractView from '../abstract-view';
 import Application from '../application';
-import BackBtnView from './items/back-btn';
+import BackButtonView from './items/back-button';
 
 export default class RulesView extends AbstractView {
   constructor() {
     super();
-    this.callback = (el) => {
-      el.preventDefault();
+    this.callback = (element) => {
+      element.preventDefault();
       Application.showGreeting();
     };
   }
 
   getTemplate() {
     const data = templatesData.rules;
-    const backBtn = new BackBtnView();
+    const backBtn = new BackButtonView();
     const header = `<header class="header">${backBtn.getTemplate()}</header>`;
     const rules = `<section class="rules"><h2 class="rules__title">${data.title}</h2>
     <ul class="rules__description">
@@ -43,19 +43,19 @@ export default class RulesView extends AbstractView {
       }
     };
 
-    this.submitCallback = (el) => {
-      el.preventDefault();
+    this.submitCallback = (element) => {
+      element.preventDefault();
       Application.showGame();
     };
 
     this.rulesInput.addEventListener(`input`, this.inputCallback);
     this.rulesForm.addEventListener(`submit`, this.submitCallback);
-    this.backBtn.addEventListener(`click`, BackBtnView.callback);
+    this.backBtn.addEventListener(`click`, BackButtonView.callback);
   }
 
   clear() {
     this.rulesInput.removeEventListener(`input`, this.inputCallback);
     this.rulesForm.removeEventListener(`submit`, this.submitCallback);
-    this.backBtn.removeEventListener(`click`, BackBtnView.callback);
+    this.backBtn.removeEventListener(`click`, BackButtonView.callback);
   }
 }

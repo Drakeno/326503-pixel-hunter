@@ -18,11 +18,11 @@ export default class OneOfThreeGameView extends AbstractView {
     const options = (tasks) => {
       const content = renderElement(``, `form`, `game__content game__content--triple`);
       tasks.forEach((item) => {
-        const properImg = OneOfThreeGameView.properSize(item);
+        const properImage = OneOfThreeGameView.properSize(item);
         const index = tasks.indexOf(item) + 1;
-        properImg.alt = `Option ${index}`;
+        properImage.alt = `Option ${index}`;
         const option = renderElement(``, `div`, `game__option`);
-        option.appendChild(properImg);
+        option.appendChild(properImage);
 
         content.appendChild(option);
       });
@@ -46,13 +46,13 @@ export default class OneOfThreeGameView extends AbstractView {
     return resizeImg(image, frame);
   }
 
-  static setGame(e, state, GameView) {
-    e.preventDefault();
+  static setGame(element, state, GameView) {
+    element.preventDefault();
     timer.stop();
     const gameOptions = document.querySelectorAll(`.game__option`);
     const answer = [];
     gameOptions.forEach((userAnswer) => {
-      if (userAnswer === e.currentTarget) {
+      if (userAnswer === element.currentTarget) {
         answer.push(imageType.PAINT);
       } else {
         answer.push(imageType.PHOTO);

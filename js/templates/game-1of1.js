@@ -1,5 +1,5 @@
 import AbstractView from '../abstract-view';
-import AnswerBtnsView from './items/answer-btns';
+import AnswerButtonsView from './items/answer-buttons';
 import {imageType} from '../data/game-data';
 import timer from './items/timer';
 import {renderElement, resizeImg} from '../utils';
@@ -18,13 +18,13 @@ export default class OneOfOneGameView extends AbstractView {
   getTemplate() {
     const option = (item) => {
       const content = renderElement(``, `form`, `game__content game__content--wide`);
-      const properImg = OneOfOneGameView.properSize(item);
-      properImg.alt = `Option 1`;
-      const answersBtns = new AnswerBtnsView(`question1`).element;
+      const properImage = OneOfOneGameView.properSize(item);
+      properImage.alt = `Option 1`;
+      const answersButtons = new AnswerButtonsView(`question1`).element;
 
       const soloOption = renderElement(``, `div`, `game__option`);
-      soloOption.appendChild(properImg);
-      soloOption.appendChild(answersBtns);
+      soloOption.appendChild(properImage);
+      soloOption.appendChild(answersButtons);
 
       content.appendChild(soloOption);
 
@@ -47,10 +47,10 @@ export default class OneOfOneGameView extends AbstractView {
     return resizeImg(image, frame);
   }
 
-  static setGame(e, state, GameView) {
-    e.preventDefault();
+  static setGame(element, state, GameView) {
+    element.preventDefault();
     timer.stop();
-    let userAnswer = e.currentTarget.querySelector(`input`).value;
+    let userAnswer = element.currentTarget.querySelector(`input`).value;
     let answer;
     if (userAnswer === `photo`) {
       answer = [imageType.PHOTO];

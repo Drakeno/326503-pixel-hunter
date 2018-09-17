@@ -5,8 +5,8 @@ import Application from '../application';
 export default class IntroView extends AbstractView {
   constructor() {
     super();
-    this.callback = (el) => {
-      el.preventDefault();
+    this.callback = (element) => {
+      element.preventDefault();
       Application.showGreeting();
     };
   }
