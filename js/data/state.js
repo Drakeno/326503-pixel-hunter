@@ -1,8 +1,8 @@
 import gameData, {GameData} from './game-data';
 import {isEquivalent} from '../utils';
 
-const points = gameData.points;
-const statsType = gameData.statsType;
+const points = gameData.Points;
+const statsType = gameData.StatsType;
 
 class State {
   constructor(state) {
@@ -46,21 +46,21 @@ class State {
   }
 
   static checkAnswerType(taskResult) {
-    let res = statsType.UNKNOWN;
+    let result = statsType.UNKNOWN;
 
     if (taskResult.isCorrect === true) {
       if (taskResult.currentTime > gameData.FAST_TIME) {
-        res = statsType.FAST;
+        result = statsType.FAST;
       } else if (taskResult.currentTime < gameData.SLOW_TIME) {
-        res = statsType.SLOW;
+        result = statsType.SLOW;
       } else {
-        res = statsType.CORRECT;
+        result = statsType.CORRECT;
       }
     } else if (taskResult.isCorrect === false) {
-      res = statsType.WRONG;
+      result = statsType.WRONG;
     }
     return Object.assign({}, taskResult, {
-      statsType: res
+      statsType: result
     });
   }
 

@@ -1,6 +1,6 @@
 import AbstractView from '../abstract-view';
 import AnswerButtonsView from './items/answer-buttons';
-import {imageType} from '../data/game-data';
+import {ImageType} from '../data/game-data';
 import timer from './items/timer';
 import {renderElement, resizeImg} from '../utils';
 
@@ -53,9 +53,9 @@ export default class OneOfOneGameView extends AbstractView {
     let userAnswer = element.currentTarget.querySelector(`input`).value;
     let answer;
     if (userAnswer === `photo`) {
-      answer = [imageType.PHOTO];
+      answer = [ImageType.PHOTO];
     } else if (userAnswer === `paint`) {
-      answer = [imageType.PAINT];
+      answer = [ImageType.PAINT];
     }
     state.setResult(answer, timer.getTime());
     GameView.goToNextScreen();

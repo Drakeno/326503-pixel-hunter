@@ -4,7 +4,7 @@ import AbstractView from '../../abstract-view';
 
 export default class AnswersHistoryView extends AbstractView {
   getTemplate() {
-    const type = gameData.statsType;
+    const type = gameData.StatsType;
     const resultsView = templatesData.statsTesults;
 
     const statsItem = {

@@ -1,7 +1,7 @@
 import {renderElement, appendElement} from '../utils';
 import GameHeaderView from './items/game-header';
 import AnswersHistoryView from './items/answers-history';
-import gameData, {gameType} from '../data/game-data';
+import gameData, {GameType} from '../data/game-data';
 import TwoOfTwoGameView from './game-2of2';
 import OneOfOneGameView from './game-1of1';
 import OneOfThreeGameView from './game-1of3';
@@ -41,11 +41,11 @@ export default class GameView {
 
   renderGameContent() {
     switch (this.task.gameType) {
-      case gameType.TwoOfTwo:
+      case GameType.TwoOfTwo:
         return new TwoOfTwoGameView(this.task, GameView.TwoOfTwoCallback).element;
-      case gameType.OneOfOne:
+      case GameType.OneOfOne:
         return new OneOfOneGameView(this.task, GameView.OneOfOneCallback).element;
-      case gameType.OneOfThree:
+      case GameType.OneOfThree:
         return new OneOfThreeGameView(this.task, GameView.OneOfThreeCallback).element;
       default:
         throw new Error(`Unknown game type`);

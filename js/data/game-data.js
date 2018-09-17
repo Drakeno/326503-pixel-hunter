@@ -1,10 +1,10 @@
-export const gameType = {
+export const GameType = {
   TwoOfTwo: 0,
   OneOfOne: 1,
   OneOfThree: 2
 };
 
-export const imageType = {
+export const ImageType = {
   PAINT: 0,
   PHOTO: 1
 };
@@ -17,7 +17,7 @@ export const gameData = {
   FAST_TIME: 20,
   SLOW_TIME: 10,
 
-  statsType: {
+  StatsType: {
     WRONG: 0,
     CORRECT: 1,
     SLOW: 2,
@@ -25,7 +25,7 @@ export const gameData = {
     UNKNOWN: 4
   },
 
-  points: {
+  Points: {
     CORRECT: 100,
     BONUS: 50,
     FINE: -50

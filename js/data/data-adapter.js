@@ -1,23 +1,14 @@
-export const gameType = {
-  TwoOfTwo: 0,
-  OneOfOne: 1,
-  OneOfThree: 2
-};
-
-export const imageType = {
-  PAINT: 0,
-  PHOTO: 1
-};
+import {GameType, ImageType} from '../data/game-data';
 
 const localTypeMapper = {
-  'two-of-two': gameType.TwoOfTwo,
-  'one-of-three': gameType.OneOfThree,
-  'tinder-like': gameType.OneOfOne
+  'two-of-two': GameType.TwoOfTwo,
+  'one-of-three': GameType.OneOfThree,
+  'tinder-like': GameType.OneOfOne
 };
 
 const localAnswerTypeMapper = {
-  'painting': imageType.PAINT,
-  'photo': imageType.PHOTO,
+  'painting': ImageType.PAINT,
+  'photo': ImageType.PHOTO,
 };
 
 const localTasksMapper = (tasks) => tasks.map((task) => {

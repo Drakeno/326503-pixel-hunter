@@ -1,6 +1,6 @@
 import AbstractView from '../abstract-view';
 import AnswerBtnsView from './items/answer-buttons';
-import {imageType} from '../data/game-data';
+import {ImageType} from '../data/game-data';
 import timer from './items/timer';
 import {renderElement, resizeImg} from '../utils';
 
@@ -65,9 +65,9 @@ export default class TwoOfTwoGameView extends AbstractView {
         const answer = answerSynchronize.map((userAnswer) => {
           switch (userAnswer) {
             case `photo`:
-              return imageType.PHOTO;
+              return ImageType.PHOTO;
             case `paint`:
-              return imageType.PAINT;
+              return ImageType.PAINT;
             default:
               return null;
           }

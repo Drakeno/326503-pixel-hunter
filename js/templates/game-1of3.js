@@ -1,5 +1,5 @@
 import AbstractView from '../abstract-view';
-import {imageType} from '../data/game-data';
+import {ImageType} from '../data/game-data';
 import timer from './items/timer';
 import {renderElement, resizeImg} from '../utils';
 
@@ -53,9 +53,9 @@ export default class OneOfThreeGameView extends AbstractView {
     const answer = [];
     gameOptions.forEach((userAnswer) => {
       if (userAnswer === element.currentTarget) {
-        answer.push(imageType.PAINT);
+        answer.push(ImageType.PAINT);
       } else {
-        answer.push(imageType.PHOTO);
+        answer.push(ImageType.PHOTO);
       }
     });
     state.setResult(answer, timer.getTime());
