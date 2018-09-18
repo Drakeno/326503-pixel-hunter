@@ -22,6 +22,11 @@ export default class OneOfThreeGameView extends AbstractView {
         const index = tasks.indexOf(item) + 1;
         properImage.alt = `Option ${index}`;
         const option = renderElement(``, `div`, `game__option`);
+        if (item.type === ImageType.PHOTO) {
+          option.dataset.imageType = ImageType.PHOTO;
+        } else {
+          option.dataset.imageType = ImageType.PAINT;
+        }
         option.appendChild(properImage);
 
         content.appendChild(option);
@@ -42,12 +47,15 @@ export default class OneOfThreeGameView extends AbstractView {
     element.preventDefault();
     timer.stop();
     const gameOptions = document.querySelectorAll(`.game__option`);
+
     const answer = [];
-    gameOptions.forEach((userAnswer) => {
-      if (userAnswer === element.currentTarget) {
-        answer.push(ImageType.PHOTO);
+    gameOptions.forEach((option) => {
+      const chosenElementType = Number(element.currentTarget.dataset.imageType);
+      const optionType = Number(option.dataset.imageType);
+      if (option === element.currentTarget) {
+        answer.push(chosenElementType);
       } else {
-        answer.push(ImageType.PAINT);
+        answer.push(optionType);
       }
     });
     state.setResult(answer, timer.getTime());
