@@ -23,9 +23,12 @@ class Timer {
       this.container.innerHTML = this.currentTime;
       this.currentTime--;
 
-      if (this.currentTime < 0) {
+      const warningTime = 5;
+      const callbackTime = 0;
+
+      if (this.currentTime < callbackTime) {
         this.callback();
-      } else if (this.currentTime < 5) {
+      } else if (this.currentTime < warningTime) {
         this.timeWarningCallback();
         this.timeoutId = setTimeout(tick, 1000);
       } else {

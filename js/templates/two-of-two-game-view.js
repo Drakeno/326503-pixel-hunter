@@ -45,6 +45,7 @@ export default class TwoOfTwoGameView extends AbstractView {
 
     if (firstAnswer) {
       const firstInput = firstAnswer.querySelector(`input`);
+      const firstName = `question1`;
       const currentInput = element.currentTarget.querySelector(`input`);
 
       if (firstInput.name === currentInput.name) {
@@ -53,12 +54,14 @@ export default class TwoOfTwoGameView extends AbstractView {
       } else {
         timer.stop();
         const secondAnswer = element.currentTarget.querySelector(`input`).value;
-        const answerSynchronize = (firstInput.name === `question1`) ? [firstInput.value, secondAnswer] : [secondAnswer, firstInput.value];
+        const answerSynchronize = (firstInput.name === firstName) ? [firstInput.value, secondAnswer] : [secondAnswer, firstInput.value];
+        const photoAnswer = `photo`;
+        const paintAnswer = `paint`;
         const answer = answerSynchronize.map((userAnswer) => {
           switch (userAnswer) {
-            case `photo`:
+            case photoAnswer:
               return ImageType.PHOTO;
-            case `paint`:
+            case paintAnswer:
               return ImageType.PAINT;
             default:
               return null;

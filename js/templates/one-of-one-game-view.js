@@ -43,10 +43,12 @@ export default class OneOfOneGameView extends AbstractView {
     element.preventDefault();
     timer.stop();
     const userAnswer = element.currentTarget.querySelector(`input`).value;
+    const photoAnswer = `photo`;
+    const paintAnswer = `paint`;
     let answer;
-    if (userAnswer === `photo`) {
+    if (userAnswer === photoAnswer) {
       answer = [ImageType.PHOTO];
-    } else if (userAnswer === `paint`) {
+    } else if (userAnswer === paintAnswer) {
       answer = [ImageType.PAINT];
     }
     state.setResult(answer, timer.getTime());
