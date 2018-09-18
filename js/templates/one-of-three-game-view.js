@@ -45,9 +45,9 @@ export default class OneOfThreeGameView extends AbstractView {
     const answer = [];
     gameOptions.forEach((userAnswer) => {
       if (userAnswer === element.currentTarget) {
-        answer.push(ImageType.PAINT);
-      } else {
         answer.push(ImageType.PHOTO);
+      } else {
+        answer.push(ImageType.PAINT);
       }
     });
     state.setResult(answer, timer.getTime());
