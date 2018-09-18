@@ -37,7 +37,6 @@ export default class GameView {
   }
 
   renderGameTask() {
-    console.log(this.questData);
     return renderElement(this.questData[this.round.currentTask].question, `p`, `game__task`);
   }
 
